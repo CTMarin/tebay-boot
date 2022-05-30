@@ -5,6 +5,8 @@
 package es.uma.tebayboot.entity;
 
 
+import es.uma.tebayboot.dto.Articulo;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -149,4 +151,10 @@ public class ArticuloEntity implements Serializable {
         return "org.org.tebay.entity.Articulo[ idArticulo=" + idArticulo + " ]";
     }
 
+    public Articulo toDTO(){
+        Articulo dto = new Articulo();
+        dto.setIdArticulo(this.idArticulo);
+        dto.setTitulo(this.titulo);
+        return dto;
+    }
 }

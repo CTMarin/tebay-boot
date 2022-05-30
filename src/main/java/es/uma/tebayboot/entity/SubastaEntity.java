@@ -146,6 +146,10 @@ public class SubastaEntity implements Serializable {
     public Subasta toDTO() {
         Subasta dto = new Subasta();
         dto.setIdSubasta(this.idSubasta);
+        dto.setArticulo(this.articulo.toDTO());
+        dto.setFechaLimite(this.fechaLimite);
+        dto.setPuja(this.puja);
+        dto.setValorInicial(this.valorInicial);
         return dto;
     }
 }
