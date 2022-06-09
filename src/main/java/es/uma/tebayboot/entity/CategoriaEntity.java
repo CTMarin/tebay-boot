@@ -5,6 +5,8 @@
 package es.uma.tebayboot.entity;
 
 
+import es.uma.tebayboot.dto.Categoria;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -103,5 +105,9 @@ public class CategoriaEntity implements Serializable {
         return "org.org.tebay.entity.Categoria[ idCategoria=" + idCategoria + " ]";
     }
 
-
+    public Categoria toDTO(){
+        Categoria dto = new Categoria();
+        dto.setTitulo(this.titulo);
+        return dto;
+    }
 }

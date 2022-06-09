@@ -10,6 +10,7 @@ import es.uma.tebayboot.dto.Articulo;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * author:
@@ -155,6 +156,10 @@ public class ArticuloEntity implements Serializable {
         Articulo dto = new Articulo();
         dto.setIdArticulo(this.idArticulo);
         dto.setTitulo(this.titulo);
+        dto.setCategoriaList(this.categoriaList.stream().map(CategoriaEntity::toDTO).collect(Collectors.toList()));
+        dto.setGanador(this.ganador==null?null:this.ganador.toDTO());
+        dto.setDescripcion(this.descripcion);
+        dto.setUrlArticulo(this.urlArticulo);
         return dto;
     }
 }

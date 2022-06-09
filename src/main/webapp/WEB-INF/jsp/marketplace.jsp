@@ -49,7 +49,7 @@
     <h1>MarketPlace</h1>
 
     <div class="form-button">
-        <form action="profile">
+        <form action="/profile/">
             <input type="submit" value="Ir a mi perfil" />
         </form>
     </div>
@@ -72,7 +72,7 @@
         %>
         <tr>
             <td class="cell-content">
-                <a href="product?id=<%= subasta.getArticulo().getIdArticulo() %>"><%=subasta.getArticulo().getTitulo()%></a>
+                <a href="/product/<%=subasta.getArticulo().getIdArticulo()%>"><%=subasta.getArticulo().getTitulo()%></a>
             </td>
             <td class="cell-content">
                 <%=subasta.getValorInicial()%>

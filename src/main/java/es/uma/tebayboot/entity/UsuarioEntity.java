@@ -5,6 +5,8 @@
 package es.uma.tebayboot.entity;
 
 
+import es.uma.tebayboot.dto.Usuario;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -215,6 +217,10 @@ public class UsuarioEntity implements Serializable {
         return "org.org.tebay.entity.Usuario[ idUsuario=" + idUsuario + " ]";
     }
 
-
-
+    public Usuario toDTO(){
+        Usuario dto = new Usuario();
+        dto.setApellidos(this.apellidos);
+        dto.setNombre(this.nombre);
+        return dto;
+    }
 }
