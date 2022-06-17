@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     protected ArticuloService articuloService;
 
-    @GetMapping("/{id_product}")
+    @GetMapping("{id_product}")
     public String doInit(Model model, @PathVariable("id_product") Integer id_product){
 
         Articulo articulo = articuloService.findById(id_product);

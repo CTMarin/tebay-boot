@@ -45,6 +45,7 @@
     }
 </style>
 <body>
+<jsp:include page="header.jsp" />
 <main class="wrapper">
     <h1>MarketPlace</h1>
 

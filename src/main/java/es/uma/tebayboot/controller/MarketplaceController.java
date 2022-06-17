@@ -17,7 +17,7 @@ public class MarketplaceController {
     @Autowired
     protected SubastaService subastaService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String doInit(Model model) {
         List<Subasta> subastas = subastaService.findAll();
         model.addAttribute("subastas",subastas);

@@ -18,21 +18,43 @@ import java.util.List;
 @RequestMapping("profile")
 public class ProfileController {
 
-    @Autowired
-    protected CategoriaService categoriaService;
+    CategoriaService categoriaService;
+    SubastaService subastaService;
+    ArticuloService articuloService;
+
+    public CategoriaService getCategoriaService() {
+        return categoriaService;
+    }
 
     @Autowired
-    protected SubastaService subastaService;
+    public void setCategoriaService(CategoriaService categoriaService) {
+        this.categoriaService = categoriaService;
+    }
+
+    public SubastaService getSubastaService() {
+        return subastaService;
+    }
 
     @Autowired
-    protected ArticuloService articuloService;
+    public void setSubastaService(SubastaService subastaService) {
+        this.subastaService = subastaService;
+    }
 
-    @GetMapping("/")
+    public ArticuloService getArticuloService() {
+        return articuloService;
+    }
+
+    @Autowired
+    public void setArticuloService(ArticuloService articuloService) {
+        this.articuloService = articuloService;
+    }
+
+    @GetMapping("")
     public String doInit(){
         return "profile";
     }
 
-    @GetMapping("/published-articles")
+    @GetMapping("published-articles")
     public String doPublishedAuctions(Model model){
 
         List<Categoria> categorias = categoriaService.findAll();
@@ -43,7 +65,7 @@ public class ProfileController {
         return "published_articles";
     }
 
-    @GetMapping("/won-auctions")
+    @GetMapping("won-auctions")
     public String doWonAuctions(Model model){
 
         List<Articulo> articulos = articuloService.findByGanador_IdUsuario(1);
@@ -52,7 +74,7 @@ public class ProfileController {
         return "won_auctions";
     }
 
-    @GetMapping("/fav-articles")
+    @GetMapping("fav-articles")
     public String doFavArticles(Model model){
 
         List<Subasta> subastasFav = subastaService.findByFavs(1);
