@@ -5,6 +5,8 @@
 package es.uma.tebayboot.entity;
 
 
+import es.uma.tebayboot.dto.Domicilio;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -163,6 +165,19 @@ public class DomicilioEntity implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Domicilio toDTO()
+    {
+        Domicilio dto = new Domicilio();
+
+        dto.setPais(this.pais);
+        dto.setCiudad(this.ciudad);
+        dto.setCalle(calle);
+        dto.setNumero(numero);
+        dto.setCodigoPostal(codigoPostal);
+
+        return dto;
     }
 
     @Override

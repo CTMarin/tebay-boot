@@ -1,5 +1,7 @@
-<%@ page import="es.uma.tebayboot.entity.Usuario" %>
-<%@ page import="java.util.List" %><%--
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="es.uma.tebayboot.entity.UsuarioEntity" %>
+<%@ page import="java.util.List" %>
+<%@ page import="es.uma.tebayboot.dto.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: tapia
   Date: 30/05/2022
@@ -7,16 +9,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="header.jsp"/>
 <html>
 <head>
     <title>Listado de usuarios</title>
 </head>
 <body>
     <h1>Listado de usuarios</h1>
-    <form method="post" action="listaUsuarios">
-        Nombre: <input type="text" name="filtroNombre" value=""/>
+    <%--<form:form method="post" action="/admin/filtrar" modelAttribute="usuarios">
+        Nombre: <f type="text" name="filtroNombre" value=""/>
         <input type="submit" value="Filtrar">
-    </form>
+    </form:form>
+    --%>
 
     <%
         List<Usuario> usuarios = (List<Usuario>)request.getAttribute("usuarios");

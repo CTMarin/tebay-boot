@@ -9,6 +9,9 @@ import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UsuarioService {
     UsuarioRepository usuarioRepository;
@@ -67,5 +70,38 @@ public class UsuarioService {
         usuario.setDomicilio(domicile);
 
         this.usuarioRepository.save(usuario);
+    }
+
+    protected List<Usuario> listEntityADTO(List<UsuarioEntity> lista)
+    {
+        if(lista != null)
+        {
+            List<Usuario> listaDTO = new ArrayList<>();
+            for(UsuarioEntity usuario : lista)
+            {
+                listaDTO.add(usuario.toDTO());
+            }
+            return listaDTO;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public List<Usuario> listarClientes(String filtroNombre)
+    {
+        List<UsuarioEntity> lista;
+
+        if((filtroNombre != null && filtroNombre.length() > 0))
+        {
+            lista = this.usuarioRepository.findByBusquedaNombre(filtroNombre);
+        }
+        else
+        {
+            lista = this.usuarioRepository.findAll();
+        }
+
+        return this.listEntityADTO(lista);
     }
 }
