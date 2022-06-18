@@ -2,6 +2,8 @@ package es.uma.tebayboot.controller;
 
 import es.uma.tebayboot.dto.Domicilio;
 import es.uma.tebayboot.dto.Usuario;
+import es.uma.tebayboot.dto.form.KeyValueDTO;
+import es.uma.tebayboot.dto.form.UsuarioEditar;
 import es.uma.tebayboot.entity.UsuarioEntity;
 import es.uma.tebayboot.service.DomicilioService;
 import es.uma.tebayboot.service.UsuarioService;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -38,6 +41,7 @@ public class UsuarioController
         this.domicilioService = domicilioService;
     }
 
+
     @GetMapping("/listaUsuarios")
     public String doListar(Model model)
     {
@@ -57,8 +61,18 @@ public class UsuarioController
     public String doEditar(@PathVariable("id") Integer IdUsuario, Model model)
     {
         Usuario usuario = this.usuarioService.buscarUsuario(IdUsuario);
-        //Domicilio domicilio =
-        model.addAttribute("usuario",usuario);
+
+        UsuarioEditar usuarioEditar = this.usuarioService.usuarioAEditar(usuario);
+
+        List<KeyValueDTO<String>> sexos = Arrays.asList(
+                new KeyValueDTO<>("Hombre", "hombre"),
+                new KeyValueDTO<>("Mujer", "mujer"),
+                new KeyValueDTO<>("Otro", "otro"));
+
+        //Domicilio domicilio = this.domicilioService.buscarDomicilio(usuario.getDomicilio().getIdDomicilio()); //?¿?¿?
+        model.addAttribute("usuarioEditar",usuarioEditar);
+        model.addAttribute("sexos", sexos);
+       // model.addAttribute("domicilio",domicilio); // ?¿?¿
 
         return "usuario";
     }

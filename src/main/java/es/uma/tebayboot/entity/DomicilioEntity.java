@@ -176,6 +176,7 @@ public class DomicilioEntity implements Serializable {
         dto.setCalle(calle);
         dto.setNumero(numero);
         dto.setCodigoPostal(codigoPostal);
+        dto.setIdDomicilio(idDomicilio);
 
         return dto;
     }

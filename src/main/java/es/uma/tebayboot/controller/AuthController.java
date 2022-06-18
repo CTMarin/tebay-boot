@@ -71,6 +71,10 @@ public class AuthController {
             model.addAttribute("error", "Usuario o contraseña incorrectos");
             goTo = "login";
         }
+        else if(usuario.getPermiso().equals("admin"))
+        {
+            goTo = "redirect:/admin/listaUsuarios";
+        }
 
         return goTo;
     }

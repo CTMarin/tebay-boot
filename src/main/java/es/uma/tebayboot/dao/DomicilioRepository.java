@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DomicilioRepository extends JpaRepository<DomicilioEntity, Integer>
 {
-
+    public DomicilioEntity findDomicilioEntityByIdDomicilio(Integer id);
 }

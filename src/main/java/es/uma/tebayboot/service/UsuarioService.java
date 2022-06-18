@@ -3,6 +3,7 @@ package es.uma.tebayboot.service;
 import es.uma.tebayboot.dao.DomicilioRepository;
 import es.uma.tebayboot.dao.UsuarioRepository;
 import es.uma.tebayboot.dto.Usuario;
+import es.uma.tebayboot.dto.form.UsuarioEditar;
 import es.uma.tebayboot.dto.form.UsuarioRegister;
 import es.uma.tebayboot.entity.DomicilioEntity;
 import es.uma.tebayboot.entity.UsuarioEntity;
@@ -143,5 +144,28 @@ public class UsuarioService {
         usuario.setPermiso(dto.getPermiso());
 
         //falta domicilio?
+    }
+
+    public UsuarioEditar usuarioAEditar(Usuario usuario)
+    {
+        UsuarioEditar usuarioADevolver = new UsuarioEditar();
+
+        usuarioADevolver.setEmail(usuario.getEmail());
+        usuarioADevolver.setPassword(usuario.getPassword());
+        usuarioADevolver.setNombre(usuario.getNombre());
+        usuarioADevolver.setApellidos(usuario.getApellidos());
+        usuarioADevolver.setEdad(usuario.getEdad());
+        usuarioADevolver.setSexo(usuario.getSexo());
+        usuarioADevolver.setPermiso(usuario.getPermiso());
+        usuarioADevolver.setPais(usuario.getDomicilio().getPais());
+        usuarioADevolver.setCiudad(usuario.getDomicilio().getCiudad());
+        usuarioADevolver.setCodigoPostal(usuario.getDomicilio().getCodigoPostal());
+        usuarioADevolver.setCalle(usuario.getDomicilio().getCalle());
+        usuarioADevolver.setNumero(usuario.getDomicilio().getNumero());
+        usuarioADevolver.setBloque(usuario.getDomicilio().getBloque());
+        usuarioADevolver.setPiso(usuario.getDomicilio().getPiso());
+        usuarioADevolver.setPuerta(usuario.getDomicilio().getPuerta());
+
+        return usuarioADevolver;
     }
 }
