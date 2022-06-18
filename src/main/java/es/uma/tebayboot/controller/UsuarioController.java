@@ -1,5 +1,6 @@
 package es.uma.tebayboot.controller;
 
+import es.uma.tebayboot.dto.Domicilio;
 import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.entity.UsuarioEntity;
 import es.uma.tebayboot.service.DomicilioService;
@@ -51,4 +52,39 @@ public class UsuarioController
 
         return "ListaUsuarios";
     }
+
+    @GetMapping("/{id}/edit")
+    public String doEditar(@PathVariable("id") Integer IdUsuario, Model model)
+    {
+        Usuario usuario = this.usuarioService.buscarUsuario(IdUsuario);
+        //Domicilio domicilio =
+        model.addAttribute("usuario",usuario);
+
+        return "usuario";
+    }
+
+    @GetMapping("/{id}/borrar")
+    public String doBorrar(@PathVariable("id") Integer IdUsuario)
+    {
+        this.usuarioService.borrarUsuario(IdUsuario);
+        return "redirect:/admin/listaUsuarios";
+    }
+
+    @PostMapping("/guardar")
+    public String doGuardar(@ModelAttribute("usuario") Usuario usuario)
+    {
+        this.usuarioService.guardarUsuario(usuario);
+        return "redirect:/admin/listaUsuarios";
+    }
+
+    @GetMapping("/nuevo")
+    public String doNuevo(Model model)
+    {
+        Usuario usuario = new Usuario();
+
+        model.addAttribute("usuario",usuario);
+        //this.anyadirdomicilio??
+        return "cliente";
+    }
+
 }

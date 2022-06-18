@@ -1,8 +1,10 @@
 package es.uma.tebayboot.service;
 
 import es.uma.tebayboot.dao.DomicilioRepository;
+import es.uma.tebayboot.dto.Domicilio;
 import es.uma.tebayboot.dto.form.UsuarioRegister;
 import es.uma.tebayboot.entity.DomicilioEntity;
+import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,5 +23,17 @@ public class DomicilioService {
         domicile.setPuerta(user.getPuerta());
 
         this.domicilioRepository.save(domicile);
+    }
+
+    /*public Domicilio buscarDomicilio(Integer id)
+    {
+        DomicilioEntity domicilio = this.domicilioRepository
+    }
+
+     */
+    public void borrarDomicilio(Integer id)
+    {
+        DomicilioEntity domicilio = this.domicilioRepository.findById(id).orElse(null);
+        this.domicilioRepository.delete(domicilio);
     }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 public class UsuarioService {
     UsuarioRepository usuarioRepository;
     DomicilioRepository domicilioRepository;
+    DomicilioService domicilioService;
 
 
     public DomicilioRepository getDomicilioRepository() {
@@ -103,5 +104,44 @@ public class UsuarioService {
         }
 
         return this.listEntityADTO(lista);
+    }
+
+    public Usuario buscarUsuario(Integer id)
+    {
+        //UsuarioEntity usuario = this.usuarioRepository.findByIdUsuario(id);
+        UsuarioEntity usuario = this.usuarioRepository.findById(id).orElse(null);
+
+        if(usuario != null)
+        {
+            return usuario.toDTO();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void borrarUsuario(Integer id)
+    {
+        UsuarioEntity usuario = this.usuarioRepository.findById(id).orElse(null);
+        this.usuarioRepository.delete(usuario);
+        this.domicilioService.borrarDomicilio(usuario.getDomicilio().getIdDomicilio());
+    }
+
+    public void guardarUsuario(Usuario dto)
+    {
+        UsuarioEntity usuario;
+
+        usuario = new UsuarioEntity(dto);
+
+        usuario.setEmail(dto.getEmail());
+        usuario.setPassword(dto.getPassword());
+        usuario.setNombre(dto.getNombre());
+        usuario.setApellidos(dto.getApellidos());
+        usuario.setEdad(dto.getEdad());
+        usuario.setSexo(dto.getSexo());
+        usuario.setPermiso(dto.getPermiso());
+
+        //falta domicilio?
     }
 }

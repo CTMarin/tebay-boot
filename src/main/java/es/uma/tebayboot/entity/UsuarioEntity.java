@@ -228,7 +228,21 @@ public class UsuarioEntity implements Serializable {
         dto.setEdad(this.edad);
         dto.setSexo(this.sexo);
         dto.setPermiso(this.permiso);
+        dto.setPassword(this.password);
 
         return dto;
+    }
+
+    public UsuarioEntity(Usuario dto)
+    {
+        this.idUsuario = dto.getIdUsuario();
+        this.apellidos = dto.getApellidos();
+        this.edad = dto.getEdad();
+        this.password = dto.getPassword();
+        this.email = dto.getEmail();
+        //this.domicilio = dto.getDomicilio();
+        this.nombre = dto.getNombre();
+        this.permiso = dto.getPermiso();
+        this.sexo = dto.getSexo();
     }
 }

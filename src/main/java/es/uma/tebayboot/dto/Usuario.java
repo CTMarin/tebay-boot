@@ -10,6 +10,7 @@ public class Usuario {
     private String sexo;
     private String permiso;
     private Domicilio domicilio;
+    private String password;
 
 
     public String getNombre() {
@@ -74,5 +75,13 @@ public class Usuario {
 
     public void setPermiso(String permiso) {
         this.permiso = permiso;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
