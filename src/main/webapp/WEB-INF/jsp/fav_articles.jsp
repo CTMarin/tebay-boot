@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.tebayboot.dto.Subasta" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.tebayboot.dto.Categoria" %><%--
@@ -75,9 +76,17 @@
                 <%=subasta.getFechaLimite()%>
             </td>
             <td class="cell-content">
-                <form method="POST" action="fav-articles">
+                <% //TODO: refactorizar el form a spring form%>
+                <form:form>
+                    <form:hidden path="fav"/>
+                    <form:hidden path="idSubasta"/>
+                    <form:button>Eliminar</form:button>
+                </form:form>
+
+                <form method="get" action="/product/fav">
                     <input type="hidden" name="id" value="<%=subasta.getIdSubasta()%>">
-                    <input type="submit" name="unfav" value="Eliminar">
+                    <input type="hidden" name="fav" value=<%=true%>>
+                    <input type="submit" value="Eliminar">
                 </form>
             </td>
         </tr>

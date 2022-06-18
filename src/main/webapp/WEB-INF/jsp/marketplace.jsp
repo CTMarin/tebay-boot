@@ -95,7 +95,8 @@
                 </form>
             </td>
             <td class="cell-content">
-                <form method="POST" action="">
+                <% //TODO: refactorizar el form a spring form%>
+                <form method="get" action="/product/fav">
                     <input type="hidden" name="id" value="<%=subasta.getIdSubasta()%>">
                     <%
                         String value;
