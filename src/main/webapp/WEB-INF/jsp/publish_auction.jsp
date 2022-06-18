@@ -1,4 +1,6 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="java.util.List" %>
+<%@ page import="es.uma.tebayboot.dto.Categoria" %>
 <%--
   Created by IntelliJ IDEA.
   User: carlo
@@ -40,10 +42,11 @@
 </style>
 <%
     String strError = (String) request.getAttribute("error");
+    List<Categoria> categoriaList = (List<Categoria>) request.getAttribute("categoriaList");
     if(strError == null) strError = "";
 %>
 <body>
-    <form method="POST" action="publish-auction" class="form">
+    <form:form method="post" action="/profile/publish-auction" cssClass="form" modelAttribute="subasta">
         <h1>
             Subasta un artículo
         </h1>
@@ -55,42 +58,34 @@
             </li>
             <li class="input-box">
                 <div class="col-25 margin">
-                    <%--@declare id="title"--%><label for="title">Título </label>
+                        <%--@declare id="title"--%><label for="title">Título </label>
                 </div>
                 <div class="col-75 margin">
-                    <input class="form-input" type="text" name="title" value="">
+                    <form:input class="form-input" path="titulo"/>
                 </div>
             </li>
             <li class="input-box">
                 <div class="col-25 margin">
-                    <%--@declare id="caption"--%><label for="caption">Descripción </label>
+                        <%--@declare id="caption"--%><label for="caption">Descripción </label>
                 </div>
                 <div class="col-75 margin">
-                    <input class="form-input" type="text" name="caption" value="">
+                    <form:input class="form-input" path="descripcion"/>
                 </div>
             </li>
             <li class="input-box">
                 <div class="col-25 margin">
-                    <%--@declare id="url"--%><label for="url">URL Foto </label>
+                        <%--@declare id="url"--%><label for="url">URL Foto </label>
                 </div>
                 <div class="col-75 margin">
-                    <input class="form-input" type="text" name="url" value="">
+                    <form:input class="form-input" path="url_imagen"/>
                 </div>
             </li>
             <li class="input-box">
                 <div class="col-25 margin">
-                    <%--@declare id="category"--%><label for="category">Categorías </label>
+                        <%--@declare id="category"--%><label for="category">Categorías </label>
                 </div>
                 <div class="col-75 margin">
-                    <%
-                        List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
-                        for(CategoriaDTO categoria : categorias) {
-                    %>
-                    <input type="checkbox" id="<%=categoria.getIdCategoria()%>" value="<%=categoria.getTitulo()%>" name="categories">
-                    <label for="<%=categoria.getIdCategoria()%>"><%= categoria.getTitulo()%></label><br>
-                    <%
-                        }
-                    %>
+                    <form:checkboxes path="categorias" items="<%=categoriaList%>" itemLabel="titulo" itemValue="titulo"/>
                 </div>
             </li>
             <li>
@@ -99,24 +94,24 @@
             </li>
             <li class="input-box">
                 <div class="col-25 margin">
-                    <%--@declare id="init-value"--%><label for="init-value">Valor Inicial </label>
+                        <%--@declare id="init-value"--%><label for="init-value">Valor Inicial </label>
                 </div>
                 <div class="col-75 margin">
-                    <input class="form-input" type="text" name="init-value" value="">
+                    <form:input class="form-input" path="valor_inicial"/>
                 </div>
             </li>
             <li class="input-box">
                 <div class="col-25 margin">
-                    <%--@declare id="deadline"--%><label for="deadline">Fecha límite </label>
+                        <%--@declare id="deadline"--%><label for="deadline">Fecha límite </label>
                 </div>
                 <div class="col-75 margin">
-                    <input class="form-input" type="date" name="deadline" value="">
+                    <form:input class="form-input" type="date" path="fecha_limite"/>
                 </div>
             </li>
             <li>
                 <input class="margin" type="submit" value="Publicar">
             </li>
         </ul>
-    </form>
+    </form:form>
 </body>
 </html>

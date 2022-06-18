@@ -24,13 +24,14 @@
     }
 </style>
 <body>
+<jsp:include page="header.jsp" />
 <main class="wrapper">
     <h1>Profile</h1>
     <div class="form-buttons">
         <form action="/marketplace/">
             <input type="submit" value="Marketplace" />
         </form>
-        <form action="publish-auction">
+        <form method="get" action="/profile/publish-auction">
             <input type="submit" value="Publicar una subasta" />
         </form>
     </div>

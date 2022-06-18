@@ -3,6 +3,8 @@ package es.uma.tebayboot.controller;
 import es.uma.tebayboot.dto.Articulo;
 import es.uma.tebayboot.dto.Categoria;
 import es.uma.tebayboot.dto.Subasta;
+import es.uma.tebayboot.dto.Usuario;
+import es.uma.tebayboot.dto.form.PublishAuction;
 import es.uma.tebayboot.service.ArticuloService;
 import es.uma.tebayboot.service.CategoriaService;
 import es.uma.tebayboot.service.SubastaService;
@@ -10,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -82,4 +87,24 @@ public class ProfileController {
 
         return "fav_articles";
     }
+
+    @GetMapping("publish-auction")
+    public String getPublishAuctionPage(Model model) {
+        PublishAuction subasta = new PublishAuction();
+        List<Categoria> categorias = categoriaService.findAll();
+
+        model.addAttribute("subasta", subasta);
+        model.addAttribute("categoriaList", categorias);
+
+        return "publish_auction";
+    }
+
+    @PostMapping("publish-auction")
+    public String postPublishAuction(@ModelAttribute PublishAuction subasta, HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("user");
+        this.subastaService.publishAuction(subasta, usuario.getEmail());
+
+        return "redirect:/marketplace";
+    }
+
 }
