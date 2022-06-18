@@ -60,29 +60,29 @@ public class ProfileController {
     }
 
     @GetMapping("published-articles")
-    public String doPublishedAuctions(Model model){
-
+    public String doPublishedAuctions(Model model, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("user");
         List<Categoria> categorias = categoriaService.findAll();
         model.addAttribute("categorias",categorias);
-        List<Subasta> subastas = subastaService.findByArticuloNameAndSeller(1,"");
+        List<Subasta> subastas = subastaService.findByArticuloNameAndSeller(usuario.getIdUsuario(),"");
         model.addAttribute("subastas",subastas);
 
         return "published_articles";
     }
 
     @GetMapping("won-auctions")
-    public String doWonAuctions(Model model){
-
-        List<Articulo> articulos = articuloService.findByGanador_IdUsuario(1);
+    public String doWonAuctions(Model model, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("user");
+        List<Articulo> articulos = articuloService.findByGanador_IdUsuario(usuario.getIdUsuario());
         model.addAttribute("articulos",articulos);
 
         return "won_auctions";
     }
 
     @GetMapping("fav-articles")
-    public String doFavArticles(Model model){
-
-        List<Subasta> subastasFav = subastaService.findByFavs(1);
+    public String doFavArticles(Model model, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("user");
+        List<Subasta> subastasFav = subastaService.findByFavs(usuario.getIdUsuario());
         model.addAttribute("subastasFav",subastasFav);
 
         return "fav_articles";
