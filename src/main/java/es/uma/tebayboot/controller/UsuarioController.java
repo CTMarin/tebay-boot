@@ -69,9 +69,15 @@ public class UsuarioController
                 new KeyValueDTO<>("Mujer", "mujer"),
                 new KeyValueDTO<>("Otro", "otro"));
 
+        List<KeyValueDTO<String>> permisos = Arrays.asList(
+                new KeyValueDTO<>("User","user"),
+                new KeyValueDTO<>("Admin", "admin")
+        );
+
         //Domicilio domicilio = this.domicilioService.buscarDomicilio(usuario.getDomicilio().getIdDomicilio()); //?¿?¿?
         model.addAttribute("usuarioEditar",usuarioEditar);
         model.addAttribute("sexos", sexos);
+        model.addAttribute("permisos",permisos);
        // model.addAttribute("domicilio",domicilio); // ?¿?¿
 
         return "usuario";
@@ -85,7 +91,7 @@ public class UsuarioController
     }
 
     @PostMapping("/guardar")
-    public String doGuardar(@ModelAttribute("usuario") Usuario usuario)
+    public String doGuardar(@ModelAttribute("usuario") UsuarioEditar usuario)
     {
         this.usuarioService.guardarUsuario(usuario);
         return "redirect:/admin/listaUsuarios";
@@ -94,11 +100,23 @@ public class UsuarioController
     @GetMapping("/nuevo")
     public String doNuevo(Model model)
     {
-        Usuario usuario = new Usuario();
+        UsuarioEditar usuario = new UsuarioEditar();
 
-        model.addAttribute("usuario",usuario);
+        List<KeyValueDTO<String>> sexos = Arrays.asList(
+                new KeyValueDTO<>("Hombre", "hombre"),
+                new KeyValueDTO<>("Mujer", "mujer"),
+                new KeyValueDTO<>("Otro", "otro"));
+
+        List<KeyValueDTO<String>> permisos = Arrays.asList(
+                new KeyValueDTO<>("User","user"),
+                new KeyValueDTO<>("Admin", "admin")
+        );
+
+        model.addAttribute("usuarioEditar",usuario);
+        model.addAttribute("sexos", sexos);
+        model.addAttribute("permisos",permisos);
         //this.anyadirdomicilio??
-        return "cliente";
+        return "usuario";
     }
 
 }

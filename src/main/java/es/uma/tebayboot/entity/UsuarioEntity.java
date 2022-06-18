@@ -240,7 +240,7 @@ public class UsuarioEntity implements Serializable {
         this.edad = dto.getEdad();
         this.password = dto.getPassword();
         this.email = dto.getEmail();
-        //this.domicilio = dto.getDomicilio();
+       // this.domicilio = dto.getDomicilio();
         this.nombre = dto.getNombre();
         this.permiso = dto.getPermiso();
         this.sexo = dto.getSexo();

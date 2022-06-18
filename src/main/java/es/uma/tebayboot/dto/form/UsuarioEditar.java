@@ -19,6 +19,7 @@ public class UsuarioEditar
     private Integer edad;
     private String sexo;
     private String permiso;
+    private Integer idUsuario;
 
     private String pais;
     private String ciudad;

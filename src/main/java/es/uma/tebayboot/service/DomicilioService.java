@@ -6,11 +6,21 @@ import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.dto.form.UsuarioRegister;
 import es.uma.tebayboot.entity.DomicilioEntity;
 import es.uma.tebayboot.entity.UsuarioEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DomicilioService {
     DomicilioRepository domicilioRepository;
+
+    public DomicilioRepository getDomicilioRepository() {
+        return domicilioRepository;
+    }
+
+    @Autowired
+    public void setDomicilioRepository(DomicilioRepository domicilioRepository) {
+        this.domicilioRepository = domicilioRepository;
+    }
 
     public void register(UsuarioRegister user) {
         DomicilioEntity domicile = new DomicilioEntity();

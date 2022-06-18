@@ -18,9 +18,11 @@
 <h1>Datos del usuario</h1>
 <%
     List<KeyValueDTO<String>> sexos = (List<KeyValueDTO<String>>) request.getAttribute("sexos");
+    List<KeyValueDTO<String>> permisos = (List<KeyValueDTO<String>>) request.getAttribute("permisos");
 %>
 <form:form action="/admin/guardar" method="post" modelAttribute="usuarioEditar">
 
+    <form:hidden path="idUsuario"></form:hidden>
     Email: <form:input path="email" size="30" /> <br/>
     Contraseña: <form:input path="password" size="30" /> <br/>
     Nombre: <form:input path="nombre" size="30" /> <br/>
@@ -30,7 +32,10 @@
     <form:select required="true" path="sexo">
     <form:options items="<%=sexos%>" itemValue="value" itemLabel="label"/>
     </form:select> <br/>
-    Permiso: <br/>
+    Permiso:
+    <form:select required="true" path="permiso">
+        <form:options items="<%=permisos%>" itemValue="value" itemLabel="label"/>
+    </form:select> <br/>
 
    <h2>Domicilio</h2>
     Pais: <form:input path="pais"/> <br/>

@@ -72,9 +72,9 @@
             }
         %>
     </table>
-    <%--
-    <a href="AdminCrearEditarServlet">Crear nuevo usuario</a> <br/>
 
+    <a href="/admin/nuevo">Crear nuevo usuario</a> <br/>
+<%--
     <br/> <a href="ListaProductosServlet">Listado de productos</a>
     --%>
 </body>

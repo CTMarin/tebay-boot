@@ -38,6 +38,17 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    public DomicilioService getDomicilioService() {
+        return domicilioService;
+    }
+
+    @Autowired
+    public void setDomicilioService(DomicilioService domicilioService) {
+        this.domicilioService = domicilioService;
+    }
+
+
+
     public Usuario findById(Integer id) {
         UsuarioEntity result = this.usuarioRepository.findById(id).orElse(null);
         return result != null ? result.toDTO() : null;
@@ -129,11 +140,11 @@ public class UsuarioService {
         this.domicilioService.borrarDomicilio(usuario.getDomicilio().getIdDomicilio());
     }
 
-    public void guardarUsuario(Usuario dto)
+    public void guardarUsuario(UsuarioEditar dto)
     {
         UsuarioEntity usuario;
 
-        usuario = new UsuarioEntity(dto);
+        usuario = new UsuarioEntity();
 
         usuario.setEmail(dto.getEmail());
         usuario.setPassword(dto.getPassword());
@@ -142,8 +153,14 @@ public class UsuarioService {
         usuario.setEdad(dto.getEdad());
         usuario.setSexo(dto.getSexo());
         usuario.setPermiso(dto.getPermiso());
+        usuario.setIdUsuario(dto.getIdUsuario());
 
-        //falta domicilio?
+        DomicilioEntity domicilio = domicilioService.formarDomicilio(dto.getPais(),dto.getCiudad(),dto.getCalle(),dto.getNumero(),dto.getCodigoPostal(),dto.getBloque(),dto.getPiso(),dto.getPuerta());
+
+        usuario.setDomicilio(domicilio);
+        this.usuarioRepository.save(usuario);
+        this.domicilioRepository.save(domicilio);
+
     }
 
     public UsuarioEditar usuarioAEditar(Usuario usuario)
