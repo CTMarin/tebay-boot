@@ -220,6 +220,7 @@ public class UsuarioEntity implements Serializable {
     public Usuario toDTO(){
         Usuario dto = new Usuario();
 
+        dto.setIdUsuario(this.idUsuario);
         dto.setApellidos(this.apellidos);
         dto.setNombre(this.nombre);
         dto.setIdUsuario(this.idUsuario);
@@ -228,7 +229,6 @@ public class UsuarioEntity implements Serializable {
         dto.setEdad(this.edad);
         dto.setSexo(this.sexo);
         dto.setPermiso(this.permiso);
-
         return dto;
     }
 }

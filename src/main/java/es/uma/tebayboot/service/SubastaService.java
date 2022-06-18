@@ -6,7 +6,9 @@ import es.uma.tebayboot.dao.UsuarioRepository;
 import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.form.PublishAuction;
 import es.uma.tebayboot.entity.ArticuloEntity;
+import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.entity.SubastaEntity;
+import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,27 @@ public class SubastaService {
 
     private List<Subasta> entityListToDTO(List<SubastaEntity> subastas) {
         return subastas.stream().map(SubastaEntity::toDTO).collect(Collectors.toList());
+    }
+
+    public void removeFav(Integer subasta_id, Usuario usuario) {
+        SubastaEntity subasta = this.subastaRepository.findById(subasta_id).orElse(null);
+
+        List<UsuarioEntity> listaUsuarios = subasta.getUsuarioList();
+        listaUsuarios.remove(usuarioRepository.findById(usuario.getIdUsuario()));
+        subasta.setUsuarioList(listaUsuarios);
+
+        subastaRepository.save(subasta);
+    }
+
+    public void addFav(Integer subasta_id, Usuario usuario) {
+        SubastaEntity subasta = this.subastaRepository.findById(subasta_id).orElse(null);
+
+        List<UsuarioEntity> listaUsuarios = subasta.getUsuarioList();
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(usuario.getIdUsuario()).orElse(null);
+        if(usuarioEntity != null) listaUsuarios.add(usuarioEntity);
+        subasta.setUsuarioList(listaUsuarios);
+
+        subastaRepository.save(subasta);
     }
 
     public SubastaEntity create(PublishAuction dto, ArticuloEntity articulo, String email) {
