@@ -49,4 +49,16 @@ public class Subasta {
     public void setPuja(Double puja) {
         this.puja = puja;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Subasta)) {
+            return false;
+        }
+        Subasta other = (Subasta) object;
+        if ((this.idSubasta == null && other.idSubasta != null) || (this.idSubasta != null && !this.idSubasta.equals(other.idSubasta))) {
+            return false;
+        }
+        return true;
+    }
 }

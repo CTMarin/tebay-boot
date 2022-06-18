@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("product")
 public class ProductController {
@@ -53,15 +55,27 @@ public class ProductController {
     }
 
     @GetMapping("/fav")
-    public String removeFavArticle(@RequestParam("id") Integer id_subasta, @RequestParam("fav") boolean fav){
-
+    public String doFavArticle(@RequestParam("id") Integer id_subasta, @RequestParam("fav") boolean fav, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("user");
         if(fav) {
-            subastaService.removeFav(id_subasta, null);
+            subastaService.removeFav(id_subasta, usuario);
         }else{
-            subastaService.addFav(id_subasta,null);
+            subastaService.addFav(id_subasta,usuario);
         }
         return "redirect:/marketplace";
     }
 
+    @GetMapping("/pujar")
+    public String doPujar(@RequestParam("id") Integer id_subasta, @RequestParam("nueva-puja") String pujaString, HttpSession session){
 
+        Usuario usuario = (Usuario) session.getAttribute("user");
+        double nuevaPuja;
+        if (pujaString.length() == 0){
+            nuevaPuja = 0;
+        } else nuevaPuja = Double.parseDouble(pujaString);
+
+        subastaService.pujar(nuevaPuja,id_subasta,usuario);
+
+        return "redirect:/marketplace";
+    }
 }

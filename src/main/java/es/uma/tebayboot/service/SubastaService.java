@@ -7,6 +7,7 @@ import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.form.PublishAuction;
 import es.uma.tebayboot.entity.ArticuloEntity;
 import es.uma.tebayboot.dto.Usuario;
+import es.uma.tebayboot.entity.PujaEntity;
 import es.uma.tebayboot.entity.SubastaEntity;
 import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class SubastaService {
     UsuarioRepository usuarioRepository;
     @Autowired
     ArticuloService articuloService;
+    @Autowired
+    PujaService pujaService;
 
     public List<Subasta> findAll(){
         return entityListToDTO(subastaRepository.findAll());
@@ -48,7 +51,9 @@ public class SubastaService {
         SubastaEntity subasta = this.subastaRepository.findById(subasta_id).orElse(null);
 
         List<UsuarioEntity> listaUsuarios = subasta.getUsuarioList();
-        listaUsuarios.remove(usuarioRepository.findById(usuario.getIdUsuario()));
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(usuario.getIdUsuario()).orElse(null);
+        if(usuarioEntity != null) listaUsuarios.remove(usuarioEntity);
+
         subasta.setUsuarioList(listaUsuarios);
 
         subastaRepository.save(subasta);
@@ -85,4 +90,15 @@ public class SubastaService {
         SubastaEntity subasta = this.create(dto, articulo, email);
         articuloService.updateSubasta(articulo.getIdArticulo(), subasta.getIdSubasta());
     }
+
+    public void pujar(double nuevaPuja, Integer id_subasta, Usuario usuario) {
+
+        SubastaEntity subasta = subastaRepository.findById(id_subasta).orElse(null);
+        if((subasta.getPuja()==null && nuevaPuja>=subasta.getValorInicial()) ||
+                subasta.getPuja()!=null && nuevaPuja>subasta.getPuja()) {
+
+            pujaService.create(nuevaPuja,id_subasta,usuario.getIdUsuario());
+        }
+    }
+
 }
