@@ -1,6 +1,7 @@
 package es.uma.tebayboot.dao;
 
 import es.uma.tebayboot.entity.SubastaEntity;
+import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +20,7 @@ public interface SubastaRepository extends JpaRepository<SubastaEntity,Integer> 
     @Query("select subasta from SubastaEntity subasta join subasta.usuarioList usuario where usuario.idUsuario=:user_id")
     List<SubastaEntity> findByFavs(@Param("user_id") Integer user_id);
 
-    @Query("select subasta from SubastaEntity subasta where subasta.articulo.titulo like :nombre")
-    List<SubastaEntity> findByNombre(String nombre);
+    @Query("select subasta from SubastaEntity subasta where subasta.articulo.titulo like CONCAT('%',:nombre,'%')")
+    List<SubastaEntity> findByNombre(@Param("nombre") String nombre);
+
 }

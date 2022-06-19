@@ -21,6 +21,10 @@
         <input type="submit" value="Filtrar">
     </form:form>
     --%>
+    <form method="post" action="/admin/filtrar">
+        Nombre:<input type="text" name="filtro" value=""/>
+        <input type="submit" value="Filtrar"/>
+    </form>
 
     <%
         List<Usuario> usuarios = (List<Usuario>)request.getAttribute("usuarios");

@@ -4,6 +4,7 @@ import es.uma.tebayboot.dto.Domicilio;
 import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.dto.form.KeyValueDTO;
+import es.uma.tebayboot.dto.form.SubastaEdit;
 import es.uma.tebayboot.dto.form.UsuarioEditar;
 import es.uma.tebayboot.entity.UsuarioEntity;
 import es.uma.tebayboot.service.DomicilioService;
@@ -102,7 +103,7 @@ public class UsuarioController
     }
 
     @PostMapping("/guardar")
-    public String doGuardar(@ModelAttribute("usuario") UsuarioEditar usuario)
+    public String doGuardar(@ModelAttribute("usuarioEditar") UsuarioEditar usuario)
     {
         this.usuarioService.guardarUsuario(usuario);
         return "redirect:/admin/listaUsuarios";
@@ -143,6 +144,32 @@ public class UsuarioController
         model.addAttribute("subastas",lista);
 
         return "listaSubastas";
+    }
+
+    @GetMapping("/subasta/{id}/edit")
+    public String doEditarSubasta(@PathVariable("id") Integer id, Model model)
+    {
+        Subasta subasta = this.subastaService.buscarSubasta(id);
+
+        SubastaEdit subastaEdit = this.subastaService.subastaAEditar(subasta);
+
+        model.addAttribute("subasta",subastaEdit);
+
+        return "subasta";
+    }
+
+    @GetMapping("/subasta/{id}/borrar")
+    public String doBorrarSubasta(@PathVariable("id") Integer id)
+    {
+        this.subastaService.borrarSubasta(id);
+        return "redirect:/admin/listaSubastas";
+    }
+
+    @PostMapping("/subasta/guardar")
+    public String doGuardarSubasta(@ModelAttribute("subasta") SubastaEdit subasta)
+    {
+        this.subastaService.guardarSubasta(subasta);
+        return "redirect:/admin/listaSubastas";
     }
 
 }

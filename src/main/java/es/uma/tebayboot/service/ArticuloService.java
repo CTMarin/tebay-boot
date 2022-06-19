@@ -11,6 +11,7 @@ import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,5 +63,18 @@ public class ArticuloService {
 
     public void updateSubasta(int product_id, int auction) {
         this.articuloRepository.updateSubasta(product_id, auction);
+    }
+
+    public ArticuloEntity formarArticulo(String titulo, String descripcion, String url)
+    {
+        ArticuloEntity articulo = new ArticuloEntity();
+
+        articulo.setUrlArticulo(url);
+        articulo.setDescripcion(descripcion);
+        articulo.setTitulo(titulo);
+
+        articuloRepository.save(articulo);
+
+        return articulo;
     }
 }

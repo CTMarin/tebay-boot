@@ -5,6 +5,7 @@ import es.uma.tebayboot.dao.SubastaRepository;
 import es.uma.tebayboot.dao.UsuarioRepository;
 import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.form.PublishAuction;
+import es.uma.tebayboot.dto.form.SubastaEdit;
 import es.uma.tebayboot.entity.ArticuloEntity;
 import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.entity.PujaEntity;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -115,6 +117,58 @@ public class SubastaService {
         }
 
         return this.entityListToDTO(lista);
+    }
+
+    public Subasta buscarSubasta(Integer id)
+    {
+        SubastaEntity subasta = this.subastaRepository.findById(id).orElse(null);
+
+        if(subasta != null)
+        {
+            return subasta.toDTO();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public SubastaEdit subastaAEditar(Subasta subasta)
+    {
+        SubastaEdit subastaADevolver = new SubastaEdit();
+
+        subastaADevolver.setTitulo(subasta.getArticulo().getTitulo());
+        subastaADevolver.setDescripcion(subasta.getArticulo().getDescripcion());
+        subastaADevolver.setUrl_imagen(subasta.getArticulo().getUrlArticulo());
+        subastaADevolver.setFecha_limite((Date) subasta.getFechaLimite());
+        subastaADevolver.setValor_inicial(subasta.getValorInicial());
+        subastaADevolver.setIdSubasta(subasta.getIdSubasta());
+
+        return subastaADevolver;
+    }
+
+    public void borrarSubasta(Integer id)
+    {
+        SubastaEntity subasta = this.subastaRepository.findById(id).orElse(null);
+        this.subastaRepository.delete(subasta);
+    }
+
+    public void guardarSubasta(SubastaEdit dto)
+    {
+        SubastaEntity subasta;
+
+        subasta = new SubastaEntity();
+
+        subasta.setIdSubasta(dto.getIdSubasta());
+        subasta.setFechaLimite(dto.getFecha_limite());
+        subasta.setValorInicial(dto.getValor_inicial());
+
+        ArticuloEntity articulo = articuloService.formarArticulo(dto.getTitulo(),dto.getDescripcion(),dto.getUrl_imagen());
+
+        subasta.setArticulo(articulo);
+        this.subastaRepository.save(subasta);
+        this.articuloRepository.save(articulo);
+
     }
 
 }

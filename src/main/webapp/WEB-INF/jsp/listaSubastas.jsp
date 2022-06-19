@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
 <%@ page import="org.tebay.dto.SubastaDTO" %>
 <%@ page import="org.tebay.service.SubastaService" %>
@@ -9,17 +10,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="es.uma.tebayboot.dto.Subasta" %>
 <%@ page import="es.uma.tebayboot.dto.Categoria" %>
+<jsp:include page="header.jsp"/>
 <html>
 <head>
     <title>Listado de subastas</title>
 </head>
 <body>
+
 <h1>Listado de subastas</h1> <a href="/admin/listaUsuarios">Volver</a> <br/>
 <%--<form method="post" action="ListaProductosServlet">
     Nombre: <input type="text" name="filtroNombre" value=""/>
     <input type="submit" value="Filtrar">
 </form>
 --%>
+
+<form method="post" action="/admin/filtrarSubastas">
+    Nombre:<input type="text" name="filtro" value=""/>
+    <input type="submit" value="Filtrar"/>
+</form>
 
 <%
     List<Subasta> subastas = (List<Subasta>)request.getAttribute("subastas");
@@ -53,8 +61,8 @@ else
 %>
 <br/>
 <b>Foto:</b> <br/> <img src="<%= subasta.getArticulo().getUrlArticulo()%>" width="500" height="300"> <br/>
-<a href="AdminBorrarSubastaServlet?id=<%= subasta.getIdSubasta()%>">Borrar</a>
-<a href="AdminModificarServlet?id=<%= subasta.getIdSubasta()%>">Editar</a> <br/>
+<a href="/admin/subasta/<%= subasta.getIdSubasta()%>/borrar">Borrar</a>
+<a href="/admin/subasta/<%= subasta.getIdSubasta()%>/edit">Editar</a> <br/>
 <br/>
 <br/>
 
