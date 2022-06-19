@@ -52,7 +52,7 @@ public class DomicilioService {
         this.domicilioRepository.delete(domicilio);
     }
 
-    public DomicilioEntity formarDomicilio(String pais, String ciudad, String calle, Integer numero, Integer codigo_postal, String bloque, String piso, String puerta)
+    public DomicilioEntity formarDomicilio(String pais, String ciudad, String calle, Integer numero, Integer codigo_postal, String bloque, String piso, String puerta, Integer id)
     {
         DomicilioEntity domicilio = new DomicilioEntity();
         domicilio.setPais(pais);
@@ -63,6 +63,7 @@ public class DomicilioService {
         domicilio.setBloque(bloque);
         domicilio.setPiso(piso);
         domicilio.setPuerta(puerta);
+        domicilio.setIdDomicilio(id);
 
         domicilioRepository.save(domicilio);
 

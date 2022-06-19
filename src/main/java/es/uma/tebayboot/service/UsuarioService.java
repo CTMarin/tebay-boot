@@ -155,11 +155,12 @@ public class UsuarioService {
         usuario.setPermiso(dto.getPermiso());
         usuario.setIdUsuario(dto.getIdUsuario());
 
-        DomicilioEntity domicilio = domicilioService.formarDomicilio(dto.getPais(),dto.getCiudad(),dto.getCalle(),dto.getNumero(),dto.getCodigoPostal(),dto.getBloque(),dto.getPiso(),dto.getPuerta());
+        DomicilioEntity domicilio = domicilioService.formarDomicilio(dto.getPais(),dto.getCiudad(),dto.getCalle(),dto.getNumero(),dto.getCodigoPostal(),dto.getBloque(),dto.getPiso(),dto.getPuerta(),dto.getIdDomicilio());
 
         usuario.setDomicilio(domicilio);
-        this.usuarioRepository.save(usuario);
         this.domicilioRepository.save(domicilio);
+        this.usuarioRepository.save(usuario);
+
 
     }
 
@@ -182,6 +183,7 @@ public class UsuarioService {
         usuarioADevolver.setBloque(usuario.getDomicilio().getBloque());
         usuarioADevolver.setPiso(usuario.getDomicilio().getPiso());
         usuarioADevolver.setPuerta(usuario.getDomicilio().getPuerta());
+        usuarioADevolver.setIdUsuario(usuario.getIdUsuario());
 
         return usuarioADevolver;
     }

@@ -38,6 +38,7 @@
     </form:select> <br/>
 
    <h2>Domicilio</h2>
+    <form:hidden path="idDomicilio"></form:hidden>
     Pais: <form:input path="pais"/> <br/>
     Ciudad: <form:input path="ciudad"/> <br/>
     Código postal: <form:input path="codigoPostal"/> <br/>

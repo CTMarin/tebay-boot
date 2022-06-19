@@ -177,6 +177,10 @@ public class DomicilioEntity implements Serializable {
         dto.setNumero(numero);
         dto.setCodigoPostal(codigoPostal);
         dto.setIdDomicilio(idDomicilio);
+        dto.setBloque(this.bloque);
+        dto.setPiso(this.piso);
+        dto.setNumero(this.numero);
+        dto.setPuerta(this.puerta);
 
         return dto;
     }

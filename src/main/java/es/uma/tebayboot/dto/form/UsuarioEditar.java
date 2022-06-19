@@ -21,6 +21,7 @@ public class UsuarioEditar
     private String permiso;
     private Integer idUsuario;
 
+    private Integer idDomicilio;
     private String pais;
     private String ciudad;
     private Integer codigoPostal;
