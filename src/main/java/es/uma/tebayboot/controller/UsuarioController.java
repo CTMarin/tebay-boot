@@ -153,7 +153,7 @@ public class UsuarioController
 
         SubastaEdit subastaEdit = this.subastaService.subastaAEditar(subasta);
 
-        model.addAttribute("subasta",subastaEdit);
+        model.addAttribute("subastaEdit",subastaEdit);
 
         return "subasta";
     }
@@ -166,7 +166,7 @@ public class UsuarioController
     }
 
     @PostMapping("/subasta/guardar")
-    public String doGuardarSubasta(@ModelAttribute("subasta") SubastaEdit subasta)
+    public String doGuardarSubasta(@ModelAttribute("subastaEdit") SubastaEdit subasta)
     {
         this.subastaService.guardarSubasta(subasta);
         return "redirect:/admin/listaSubastas";

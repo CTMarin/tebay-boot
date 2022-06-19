@@ -19,5 +19,6 @@ public class SubastaEdit {
     Double valor_inicial;
     Date fecha_limite;
     Integer idSubasta;
+    Integer idArticulo;
 }
 

@@ -65,13 +65,15 @@ public class ArticuloService {
         this.articuloRepository.updateSubasta(product_id, auction);
     }
 
-    public ArticuloEntity formarArticulo(String titulo, String descripcion, String url)
+    public ArticuloEntity formarArticulo(String titulo, String descripcion, String url,Integer idArticulo)
     {
         ArticuloEntity articulo = new ArticuloEntity();
 
         articulo.setUrlArticulo(url);
         articulo.setDescripcion(descripcion);
         articulo.setTitulo(titulo);
+        articulo.setIdArticulo(idArticulo);
+
 
         articuloRepository.save(articulo);
 

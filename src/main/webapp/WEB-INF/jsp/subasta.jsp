@@ -18,7 +18,7 @@
 %>
 <body>
 <h1>Datos de la subasta</h1>
-<form:form action="/admin/subasta/guardar" method="post" modelAttribute="subasta">
+<form:form action="/admin/subasta/guardar" method="post" modelAttribute="subastaEdit">
 <form:hidden path="idSubasta"></form:hidden>
   Titulo: <form:input path="titulo" size="30"/> <br/>
   Descripción: <form:input path="descripcion" size="90"/> <br/>

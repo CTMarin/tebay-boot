@@ -150,24 +150,23 @@ public class SubastaService {
     public void borrarSubasta(Integer id)
     {
         SubastaEntity subasta = this.subastaRepository.findById(id).orElse(null);
-        this.subastaRepository.delete(subasta);
+        //this.subastaRepository.delete(subasta);
+        this.articuloRepository.delete(subasta.getArticulo());
     }
 
     public void guardarSubasta(SubastaEdit dto)
     {
-        SubastaEntity subasta;
 
-        subasta = new SubastaEntity();
+        SubastaEntity subasta = this.subastaRepository.findById(dto.getIdSubasta()).orElse(null);
 
-        subasta.setIdSubasta(dto.getIdSubasta());
-        subasta.setFechaLimite(dto.getFecha_limite());
+        subasta.getArticulo().setTitulo(dto.getTitulo());
+        subasta.getArticulo().setDescripcion(dto.getDescripcion());
+        subasta.getArticulo().setUrlArticulo(dto.getUrl_imagen());
         subasta.setValorInicial(dto.getValor_inicial());
+        subasta.setFechaLimite(dto.getFecha_limite());
 
-        ArticuloEntity articulo = articuloService.formarArticulo(dto.getTitulo(),dto.getDescripcion(),dto.getUrl_imagen());
-
-        subasta.setArticulo(articulo);
         this.subastaRepository.save(subasta);
-        this.articuloRepository.save(articulo);
+
 
     }
 
