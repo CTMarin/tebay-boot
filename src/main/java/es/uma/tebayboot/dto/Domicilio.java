@@ -2,7 +2,9 @@ package es.uma.tebayboot.dto;
 
 import java.util.List;
 import java.util.StringJoiner;
-
+/*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 public class Domicilio
 {
     private Integer idDomicilio;

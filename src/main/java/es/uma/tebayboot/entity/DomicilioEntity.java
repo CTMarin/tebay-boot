@@ -14,8 +14,8 @@ import java.util.StringJoiner;
 
 /**
  * author:
- *  - Carlos Marín Corbera 50%
- *  - Álvaro Jesús Tapia Muñoz 50%
+ *  - Carlos Marín Corbera 30%
+ *  - Álvaro Jesús Tapia Muñoz 70%
  */
 @Entity
 @Table(name = "domicilio")

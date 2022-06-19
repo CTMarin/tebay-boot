@@ -1,8 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
-<%@ page import="org.tebay.dto.SubastaDTO" %>
-<%@ page import="org.tebay.service.SubastaService" %>
-<%@ page import="org.tebay.dto.CategoriaDTO" %>
+/*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 --%>
 
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -18,11 +18,7 @@
 <body>
 
 <h1>Listado de subastas</h1> <a href="/admin/listaUsuarios">Volver</a> <br/>
-<%--<form method="post" action="ListaProductosServlet">
-    Nombre: <input type="text" name="filtroNombre" value=""/>
-    <input type="submit" value="Filtrar">
-</form>
---%>
+
 
 <form method="post" action="/admin/filtrarSubastas">
     Nombre:<input type="text" name="filtro" value=""/>

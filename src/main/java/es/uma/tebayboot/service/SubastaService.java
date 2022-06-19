@@ -18,7 +18,9 @@ import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/*
+    Álvaro J. Tapia Muñoz: 50%
+ */
 @Service
 public class SubastaService {
 

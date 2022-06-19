@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+    Álvaro J. Tapia Muñoz: 80%
+ */
 @Service
 public class UsuarioService {
     UsuarioRepository usuarioRepository;

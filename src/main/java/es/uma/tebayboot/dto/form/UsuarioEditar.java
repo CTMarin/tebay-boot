@@ -1,6 +1,8 @@
 package es.uma.tebayboot.dto.form;
 
-
+/*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

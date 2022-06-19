@@ -7,7 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/*
+    Álvaro J. Tapia Muñoz: 50%
+ */
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
     @Query("select user from UsuarioEntity user where user.email = :email and user.password = :password")

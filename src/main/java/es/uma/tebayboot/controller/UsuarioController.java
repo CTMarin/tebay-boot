@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-
+/*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 @Controller
 @RequestMapping("admin")
 public class UsuarioController

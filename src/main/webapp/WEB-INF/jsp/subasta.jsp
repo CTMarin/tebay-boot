@@ -4,7 +4,9 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="es.uma.tebayboot.dto.Subasta" %>
 <%--
-
+/*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp"/>

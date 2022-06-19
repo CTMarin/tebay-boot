@@ -8,7 +8,9 @@ import es.uma.tebayboot.entity.DomicilioEntity;
 import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/*
+    Álvaro J. Tapia Muñoz: 80%
+ */
 @Service
 public class DomicilioService {
     DomicilioRepository domicilioRepository;

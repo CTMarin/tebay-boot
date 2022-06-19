@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-
+/*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 
 @Data
 @NoArgsConstructor

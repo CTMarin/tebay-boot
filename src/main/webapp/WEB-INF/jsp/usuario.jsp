@@ -2,11 +2,9 @@
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: tapia
-  Date: 17/06/2022
-  Time: 23:42
-  To change this template use File | Settings | File Templates.
+/*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

@@ -15,7 +15,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/*
+    Álvaro J. Tapia Muñoz: 20%
+ */
 @Service
 public class ArticuloService {
 

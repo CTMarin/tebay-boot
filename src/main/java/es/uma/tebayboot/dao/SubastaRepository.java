@@ -8,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/*
+    Álvaro J. Tapia Muñoz: 30%
+ */
 @Repository
 public interface SubastaRepository extends JpaRepository<SubastaEntity,Integer> {
 

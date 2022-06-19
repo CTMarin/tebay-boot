@@ -2,11 +2,9 @@
 <%@ page import="es.uma.tebayboot.entity.UsuarioEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.tebayboot.dto.Usuario" %><%--
-  Created by IntelliJ IDEA.
-  User: tapia
-  Date: 30/05/2022
-  Time: 9:47
-  To change this template use File | Settings | File Templates.
+ /*
+    Álvaro J. Tapia Muñoz: 100%
+ */
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp"/>
@@ -16,11 +14,7 @@
 </head>
 <body>
     <h1>Listado de usuarios</h1>
-    <%--<form:form method="post" action="/admin/filtrar" modelAttribute="usuarios">
-        Nombre: <f type="text" name="filtroNombre" value=""/>
-        <input type="submit" value="Filtrar">
-    </form:form>
-    --%>
+
     <form method="post" action="/admin/filtrar">
         Nombre:<input type="text" name="filtro" value=""/>
         <input type="submit" value="Filtrar"/>

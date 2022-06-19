@@ -13,9 +13,9 @@ import java.util.List;
 
 /**
  * author:
- *  - Carlos Marín Corbera 50%
+ *  - Carlos Marín Corbera 40%
  *  - Carmen González Ortega 20%
- *  - Álvaro Jesús Tapia Muñoz 30%
+ *  - Álvaro Jesús Tapia Muñoz 40%
  */
 @Entity
 @Table(name = "usuario")
