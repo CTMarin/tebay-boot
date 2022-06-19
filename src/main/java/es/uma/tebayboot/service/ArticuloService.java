@@ -1,15 +1,17 @@
 package es.uma.tebayboot.service;
 
 import es.uma.tebayboot.dao.ArticuloRepository;
+import es.uma.tebayboot.dao.CategoriaRepository;
 import es.uma.tebayboot.dto.Articulo;
 import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.entity.ArticuloEntity;
-import es.uma.tebayboot.entity.SubastaEntity;
+import es.uma.tebayboot.entity.CategoriaEntity;
 import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +19,9 @@ import java.util.stream.Collectors;
 public class ArticuloService {
 
     @Autowired
-    protected ArticuloRepository articuloRepository;
+    ArticuloRepository articuloRepository;
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
     public List<Articulo> findByGanador_IdUsuario(Integer id_user){
         return entityListToDTO(articuloRepository.findByGanador_IdUsuario(id_user));
@@ -39,5 +43,24 @@ public class ArticuloService {
 
     private List<Articulo> entityListToDTO(List<ArticuloEntity> articulos) {
         return articulos.stream().map(ArticuloEntity::toDTO).collect(Collectors.toList());
+    }
+
+    public ArticuloEntity create(String titulo, String descripcion, List<String> categories, String image_url) {
+        List<CategoriaEntity> categoryList = new ArrayList<>();
+        for(String category : categories) {
+            categoryList.add(this.categoriaRepository.getCategoriaEntityByTitulo(category));
+        }
+        ArticuloEntity product = new ArticuloEntity();
+        product.setTitulo(titulo);
+        product.setDescripcion(descripcion);
+        product.setCategoriaList(categoryList);
+        product.setUrlArticulo(image_url);
+        this.articuloRepository.save(product);
+
+        return product;
+    }
+
+    public void updateSubasta(int product_id, int auction) {
+        this.articuloRepository.updateSubasta(product_id, auction);
     }
 }

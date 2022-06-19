@@ -1,6 +1,8 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.tebayboot.dto.Subasta" %>
 <%@ page import="java.util.List" %>
-<%@ page import="es.uma.tebayboot.dto.Categoria" %><%--
+<%@ page import="es.uma.tebayboot.dto.Categoria" %>
+<%@ page import="es.uma.tebayboot.dto.Fav" %><%--
   Created by IntelliJ IDEA.
   User: carme
   Date: 09/06/2022
@@ -51,6 +53,7 @@
         <%
             List<Subasta> subastasFav = (List<Subasta>) request.getAttribute("subastasFav");
             for(Subasta subasta : subastasFav) {
+                Fav fav = subasta.getFav();
         %>
         <tr>
             <td class="cell-content">
@@ -75,9 +78,10 @@
                 <%=subasta.getFechaLimite()%>
             </td>
             <td class="cell-content">
-                <form method="POST" action="fav-articles">
+                <form method="get" action="/product/fav">
                     <input type="hidden" name="id" value="<%=subasta.getIdSubasta()%>">
-                    <input type="submit" name="unfav" value="Eliminar">
+                    <input type="hidden" name="fav" value=<%=true%>>
+                    <input type="submit" value="Eliminar">
                 </form>
             </td>
         </tr>

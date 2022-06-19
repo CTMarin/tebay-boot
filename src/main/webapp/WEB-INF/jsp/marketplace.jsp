@@ -66,7 +66,7 @@
             <th class="cell-content">FAV</th>
         </tr>
         <%
-            List<Subasta> favoritos = new ArrayList<>();
+            List<Subasta> favoritos = (List<Subasta>) request.getAttribute("favoritos");
             List<Subasta> subastas = (List<Subasta>) request.getAttribute("subastas");
             for(Subasta subasta : subastas) {
                 if(subasta.getFechaLimite().after(Date.from(Instant.now()))) {
@@ -85,7 +85,7 @@
                 <%=subasta.getFechaLimite().toString()%>
             </td>
             <td class="cell-content col-25">
-                <form method="POST" action="pujar">
+                <form method="get" action="/product/pujar">
                     <input type="hidden" name="id" value="<%=subasta.getIdSubasta()%>">
                     <div class="input-text">
                         <input type="number" name="nueva-puja" value="">
@@ -96,19 +96,20 @@
                 </form>
             </td>
             <td class="cell-content">
-                <form method="POST" action="">
+
+                <form method="get" action="/product/fav">
                     <input type="hidden" name="id" value="<%=subasta.getIdSubasta()%>">
                     <%
                         String value;
                         if (favoritos.contains(subasta)){
                             value= "Unfav";
                     %>
-                    <input type="hidden" name="fav" value=<%=false%>>
+                            <input type="hidden" name="fav" value=<%=true%>>
                     <%
-                    } else {
-                        value= "Fav";
+                        } else {
+                            value= "Fav";
                     %>
-                    <input type="hidden" name="fav" value=<%=true%>>
+                            <input type="hidden" name="fav" value=<%=false%>>
                     <%
                         }
                     %>

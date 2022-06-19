@@ -10,8 +10,10 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
-    @Query("select user from UsuarioEntity user where user.email = :email and user.password =:password")
+    @Query("select user from UsuarioEntity user where user.email = :email and user.password = :password")
     public UsuarioEntity checkUser(@Param("email") String email, @Param("password") String passwd);
+
+    public UsuarioEntity getUsuarioEntityByEmail(String email);
 
     @Query("SELECT u from UsuarioEntity u where u.nombre LIKE CONCAT('%',:nombre,'%')")
     public List<UsuarioEntity> findByBusquedaNombre(@Param("nombre") String nombre);
