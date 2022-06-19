@@ -6,7 +6,7 @@
 <%@ page import="java.time.Instant" %>
 <%@ page import="es.uma.tebayboot.dto.Usuario" %><%--
   Created by IntelliJ IDEA.
-  User: carme
+  User: Carmen González Ortega
   Date: 08/06/2022
   Time: 19:46
   To change this template use File | Settings | File Templates.

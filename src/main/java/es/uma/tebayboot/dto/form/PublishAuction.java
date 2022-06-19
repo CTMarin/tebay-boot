@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.List;
-
+/**
+ * author: Carlos Marín Corbera 100%
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

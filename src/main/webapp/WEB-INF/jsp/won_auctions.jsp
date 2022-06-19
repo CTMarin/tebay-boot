@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.tebayboot.dto.Categoria" %><%--
   Created by IntelliJ IDEA.
-  User: carme
+  User: Carmen González Ortega
   Date: 09/06/2022
   Time: 11:46
   To change this template use File | Settings | File Templates.

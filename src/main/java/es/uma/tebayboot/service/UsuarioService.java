@@ -11,7 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * author:
+ *  - Carlos Marín Corbera 50%
+ *  - Álvaro Jesús Tapia Muñoz 50%
+ */
 @Service
 public class UsuarioService {
     UsuarioRepository usuarioRepository;
@@ -72,36 +76,27 @@ public class UsuarioService {
         this.usuarioRepository.save(usuario);
     }
 
-    protected List<Usuario> listEntityADTO(List<UsuarioEntity> lista)
-    {
-        if(lista != null)
-        {
+    protected List<Usuario> listEntityADTO(List<UsuarioEntity> lista) {
+        if(lista != null) {
             List<Usuario> listaDTO = new ArrayList<>();
-            for(UsuarioEntity usuario : lista)
-            {
+            for(UsuarioEntity usuario : lista) {
                 listaDTO.add(usuario.toDTO());
             }
             return listaDTO;
         }
-        else
-        {
+        else {
             return null;
         }
     }
 
-    public List<Usuario> listarClientes(String filtroNombre)
-    {
+    public List<Usuario> listarClientes(String filtroNombre) {
         List<UsuarioEntity> lista;
-
-        if((filtroNombre != null && filtroNombre.length() > 0))
-        {
+        if((filtroNombre != null && filtroNombre.length() > 0)) {
             lista = this.usuarioRepository.findByBusquedaNombre(filtroNombre);
         }
-        else
-        {
+        else {
             lista = this.usuarioRepository.findAll();
         }
-
         return this.listEntityADTO(lista);
     }
 }

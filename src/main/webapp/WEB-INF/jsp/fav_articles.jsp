@@ -4,7 +4,7 @@
 <%@ page import="es.uma.tebayboot.dto.Categoria" %>
 <%@ page import="es.uma.tebayboot.dto.Fav" %><%--
   Created by IntelliJ IDEA.
-  User: carme
+  User: Carmen González Ortega
   Date: 09/06/2022
   Time: 12:04
   To change this template use File | Settings | File Templates.
@@ -53,7 +53,6 @@
         <%
             List<Subasta> subastasFav = (List<Subasta>) request.getAttribute("subastasFav");
             for(Subasta subasta : subastasFav) {
-                Fav fav = subasta.getFav();
         %>
         <tr>
             <td class="cell-content">

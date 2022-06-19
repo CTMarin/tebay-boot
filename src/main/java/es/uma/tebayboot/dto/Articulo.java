@@ -1,7 +1,12 @@
 package es.uma.tebayboot.dto;
 
 import java.util.List;
-
+/**
+ * author:
+ *  - Carmen González Ortega 33%
+ *  - Carlos Marín Corbera 33%
+ *  - Álvaro Jesús Tapia Muñoz 33%
+ */
 public class Articulo {
 
     private Integer idArticulo;

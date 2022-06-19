@@ -14,8 +14,9 @@ import java.util.stream.Collectors;
 
 /**
  * author:
- *  - Carlos Marín Corbera 80%
- *  - Carmen González Ortega 20%
+ *  - Carmen González Ortega 33%
+ *  - Carlos Marín Corbera 33%
+ *  - Álvaro Jesús Tapia Muñoz 33%
  */
 @Entity
 @Table(name = "articulo")

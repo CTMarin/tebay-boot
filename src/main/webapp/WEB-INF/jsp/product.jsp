@@ -3,7 +3,7 @@
 <%@ page import="es.uma.tebayboot.dto.Categoria" %>
 <%@ page import="es.uma.tebayboot.dto.Usuario" %><%--
   Created by IntelliJ IDEA.
-  User: carme
+  User: Carmen González Ortega
   Date: 09/06/2022
   Time: 17:15
   To change this template use File | Settings | File Templates.

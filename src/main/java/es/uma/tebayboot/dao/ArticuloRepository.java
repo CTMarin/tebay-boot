@@ -12,7 +12,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+/**
+ * author:
+ *  - Carmen González Ortega 50%
+ *  - Carlos Marín Corbera 50%
+ */
 @Repository
 public interface ArticuloRepository extends JpaRepository<ArticuloEntity,Integer> {
 

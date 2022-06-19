@@ -16,7 +16,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * author:
+ *  - Carmen González Ortega 50%
+ *  - Carlos Marín Corbera 50%
+ */
 @Service
 public class SubastaService {
 

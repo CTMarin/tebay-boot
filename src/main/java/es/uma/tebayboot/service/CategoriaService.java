@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * author:
+ *  - Carmen González Ortega 100%
+ */
 @Service
 public class CategoriaService {
 
@@ -20,6 +23,8 @@ public class CategoriaService {
     public List<Categoria> findAll(){
         return entityListToDTO(categoriaRepository.findAll());
     }
+
+
 
     private List<Categoria> entityListToDTO(List<CategoriaEntity> categorias) {
         return categorias.stream().map(CategoriaEntity::toDTO).collect(Collectors.toList());

@@ -13,8 +13,9 @@ import java.util.List;
 
 /**
  * author:
- *  - Carlos Marín Corbera 90%
- *  - Carmen González Ortega 10%
+ *  - Carmen González Ortega 33%
+ *  - Carlos Marín Corbera 33%
+ *  - Álvaro Jesús Tapia Muñoz 33%
  */
 @Entity
 @Table(name = "categoria")

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+/**
+ * author: Carmen González Ortega 100%
+ */
 @Controller
 @RequestMapping("profile")
 public class ProfileController {
@@ -104,7 +106,7 @@ public class ProfileController {
         Usuario usuario = (Usuario) session.getAttribute("user");
         this.subastaService.publishAuction(subasta, usuario.getEmail());
 
-        return "redirect:/marketplace";
+        return "redirect:/";
     }
 
 }

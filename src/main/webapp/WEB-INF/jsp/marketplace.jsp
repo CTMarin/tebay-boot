@@ -5,7 +5,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
-  User: carme
+  User: Carmen González Ortega
   Date: 30/05/2022
   Time: 8:58
   To change this template use File | Settings | File Templates.

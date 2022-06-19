@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-
+/**
+ * author: Carmen González Ortega 100%
+ */
 @Controller
 @RequestMapping("product")
 public class ProductController {
@@ -62,7 +64,7 @@ public class ProductController {
         }else{
             subastaService.addFav(id_subasta,usuario);
         }
-        return "redirect:/marketplace";
+        return "redirect:/";
     }
 
     @GetMapping("/pujar")
@@ -76,6 +78,6 @@ public class ProductController {
 
         subastaService.pujar(nuevaPuja,id_subasta,usuario);
 
-        return "redirect:/marketplace";
+        return "redirect:/";
     }
 }

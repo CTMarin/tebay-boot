@@ -1,7 +1,12 @@
 package es.uma.tebayboot.dto;
 
 import java.util.Date;
-
+/**
+ * author:
+ *  - Carmen González Ortega 33%
+ *  - Carlos Marín Corbera 33%
+ *  - Álvaro Jesús Tapia Muñoz 33%
+ */
 public class Subasta {
 
     private Integer idSubasta;

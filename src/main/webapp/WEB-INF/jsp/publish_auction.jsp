@@ -3,7 +3,7 @@
 <%@ page import="es.uma.tebayboot.dto.Categoria" %>
 <%--
   Created by IntelliJ IDEA.
-  User: carlo
+  User: Carlos Marín Corbera
   Date: 19/04/2022
   Time: 16:49
   To change this template use File | Settings | File Templates.

@@ -4,7 +4,10 @@ import es.uma.tebayboot.dao.DomicilioRepository;
 import es.uma.tebayboot.dto.form.UsuarioRegister;
 import es.uma.tebayboot.entity.DomicilioEntity;
 import org.springframework.stereotype.Service;
-
+/**
+ * author:
+ *  - Carlos Marín Corbera 100%
+ */
 @Service
 public class DomicilioService {
     DomicilioRepository domicilioRepository;

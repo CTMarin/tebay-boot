@@ -6,7 +6,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * author:
+ *  - Carmen González Ortega 33%
+ *  - Carlos Marín Corbera 33%
+ *  - Álvaro Jesús Tapia Muñoz 33%
+ */
 @Entity
 @Table(name = "subasta")
 public class SubastaEntity implements Serializable {

@@ -1,6 +1,6 @@
 <%@ page import="es.uma.tebayboot.dto.Usuario" %><%--
   Created by IntelliJ IDEA.
-  User: carlo
+  User: Carlos Marín Corbera
   Date: 16/06/2022
   Time: 18:46
   To change this template use File | Settings | File Templates.

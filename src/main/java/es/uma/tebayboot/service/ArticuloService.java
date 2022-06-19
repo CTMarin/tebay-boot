@@ -14,7 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * author:
+ *  - Carmen González Ortega 30%
+ *  - Carlos Marín Corbera 70%
+ */
 @Service
 public class ArticuloService {
 

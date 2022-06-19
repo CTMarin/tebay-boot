@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * author: Carlos Marín Corbera 100%
+ */
+
 @Controller
 public class AuthController {
     UsuarioService usuarioService;
@@ -63,7 +67,7 @@ public class AuthController {
     @PostMapping("/auth")
     public String authenticate(Model model, HttpSession session,
                                @ModelAttribute UsuarioLogin user) {
-        String goTo = "redirect:/marketplace/";
+        String goTo = "redirect:/";
 
         Usuario usuario = this.usuarioService.checkUser(user.getEmail(), user.getPassword());
         session.setAttribute("user", usuario);

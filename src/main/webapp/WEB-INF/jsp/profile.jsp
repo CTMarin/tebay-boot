@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: carme
+  User: Carmen González Ortega
   Date: 08/06/2022
   Time: 19:29
   To change this template use File | Settings | File Templates.
@@ -28,7 +28,7 @@
 <main class="wrapper">
     <h1>Profile</h1>
     <div class="form-buttons">
-        <form action="/marketplace/">
+        <form action="/">
             <input type="submit" value="Marketplace" />
         </form>
         <form method="get" action="/profile/publish-auction">
