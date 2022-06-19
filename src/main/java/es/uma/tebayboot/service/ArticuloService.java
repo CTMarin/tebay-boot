@@ -2,6 +2,7 @@ package es.uma.tebayboot.service;
 
 import es.uma.tebayboot.dao.ArticuloRepository;
 import es.uma.tebayboot.dao.CategoriaRepository;
+import es.uma.tebayboot.dao.UsuarioRepository;
 import es.uma.tebayboot.dto.Articulo;
 import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.Usuario;
@@ -25,6 +26,8 @@ public class ArticuloService {
     ArticuloRepository articuloRepository;
     @Autowired
     CategoriaRepository categoriaRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     public List<Articulo> findByGanador_IdUsuario(Integer id_user){
         return entityListToDTO(articuloRepository.findByGanador_IdUsuario(id_user));
@@ -80,5 +83,17 @@ public class ArticuloService {
         articuloRepository.save(articulo);
 
         return articulo;
+    }
+
+    public void asignarGanador(Usuario usuario, Integer id_articulo) {
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(usuario.getIdUsuario()).orElse(null);
+        ArticuloEntity articulo = articuloRepository.findById(id_articulo).orElse(null);
+        articulo.setGanador(usuarioEntity);
+        articuloRepository.save(articulo);
+
+        List<ArticuloEntity> lista = usuarioEntity.getArticuloList();
+        lista.add(articulo);
+        usuarioEntity.setArticuloList(lista);
+        usuarioRepository.save(usuarioEntity);
     }
 }

@@ -78,4 +78,13 @@ public class ProductController {
 
         return "redirect:/marketplace";
     }
+
+    @GetMapping("/asignar")
+    public String doAsignarGanador(HttpSession session, @RequestParam("articuloId") Integer id_articulo){
+
+        Usuario usuario = (Usuario) session.getAttribute("user");
+        articuloService.asignarGanador(usuario,id_articulo);
+
+        return "redirect:/profile/published-articles";
+    }
 }
