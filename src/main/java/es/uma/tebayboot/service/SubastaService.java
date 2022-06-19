@@ -101,4 +101,20 @@ public class SubastaService {
         }
     }
 
+    public List<Subasta> listarSubastas(String filtroNombre)
+    {
+        List<SubastaEntity> lista;
+
+        if(filtroNombre != null && filtroNombre.length() > 0)
+        {
+            lista = this.subastaRepository.findByNombre(filtroNombre);
+        }
+        else
+        {
+            lista = this.subastaRepository.findAll();
+        }
+
+        return this.entityListToDTO(lista);
+    }
+
 }

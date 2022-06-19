@@ -1,11 +1,13 @@
 package es.uma.tebayboot.controller;
 
 import es.uma.tebayboot.dto.Domicilio;
+import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.dto.form.KeyValueDTO;
 import es.uma.tebayboot.dto.form.UsuarioEditar;
 import es.uma.tebayboot.entity.UsuarioEntity;
 import es.uma.tebayboot.service.DomicilioService;
+import es.uma.tebayboot.service.SubastaService;
 import es.uma.tebayboot.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +24,7 @@ public class UsuarioController
 {
     private UsuarioService usuarioService;
     private DomicilioService domicilioService;
+    private SubastaService subastaService;
 
     public UsuarioService getUsuarioService() {
         return usuarioService;
@@ -41,6 +44,14 @@ public class UsuarioController
         this.domicilioService = domicilioService;
     }
 
+    public SubastaService getSubastaService() {
+        return subastaService;
+    }
+
+    @Autowired
+    public void setSubastaService(SubastaService subastaService) {
+        this.subastaService = subastaService;
+    }
 
     @GetMapping("/listaUsuarios")
     public String doListar(Model model)
@@ -117,6 +128,21 @@ public class UsuarioController
         model.addAttribute("permisos",permisos);
         //this.anyadirdomicilio??
         return "usuario";
+    }
+
+    @GetMapping("/listaSubastas")
+    public String doListarSubastas(Model model)
+    {
+        return this.doFiltrarSubastas(model,null);
+    }
+
+    @PostMapping("/filtrarSubastas")
+    public String doFiltrarSubastas(Model model, @RequestParam("filtro") String filtro)
+    {
+        List<Subasta> lista = this.subastaService.listarSubastas(filtro);
+        model.addAttribute("subastas",lista);
+
+        return "listaSubastas";
     }
 
 }

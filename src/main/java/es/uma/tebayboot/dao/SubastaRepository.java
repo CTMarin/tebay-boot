@@ -18,4 +18,7 @@ public interface SubastaRepository extends JpaRepository<SubastaEntity,Integer> 
 
     @Query("select subasta from SubastaEntity subasta join subasta.usuarioList usuario where usuario.idUsuario=:user_id")
     List<SubastaEntity> findByFavs(@Param("user_id") Integer user_id);
+
+    @Query("select subasta from SubastaEntity subasta where subasta.articulo.titulo like :nombre")
+    List<SubastaEntity> findByNombre(String nombre);
 }

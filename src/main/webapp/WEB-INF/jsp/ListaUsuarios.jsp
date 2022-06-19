@@ -74,8 +74,8 @@
     </table>
 
     <a href="/admin/nuevo">Crear nuevo usuario</a> <br/>
-<%--
-    <br/> <a href="ListaProductosServlet">Listado de productos</a>
-    --%>
+
+    <br/> <a href="/admin/listaSubastas">Listado de subastas</a>
+
 </body>
 </html>
