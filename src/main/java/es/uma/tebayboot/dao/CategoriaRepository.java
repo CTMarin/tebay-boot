@@ -12,6 +12,4 @@ import java.util.List;
 @Repository
 public interface CategoriaRepository extends JpaRepository<CategoriaEntity,Integer> {
     public CategoriaEntity getCategoriaEntityByTitulo(String titulo);
-
-    public List<CategoriaEntity> findAllFiltered();
 }

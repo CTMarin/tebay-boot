@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.tebayboot.dto.Categoria" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -12,6 +13,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="header.jsp"/>
 <html>
 <head>
     <title>Tebay</title>
@@ -37,8 +39,8 @@
         table-layout: fixed;
     }
 </style>
+<body>
 <main class="wrapper">
-    <body>
     <form action="/profile/">
         <input type="submit" value="Volver" />
     </form>
@@ -49,27 +51,28 @@
         <input type="submit" value="Buscar">
     </form>
     <h2>Filtros</h2>
-    <form method="get" action="published-articles">
+    <%
+        List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
+    %>
+    <form:form method="get" action="published-articles" modelAttribute="filters">
+        <form:hidden value="true" path="filter"/>
         <%--@declare id="categoria_filter"--%><label for="categoria_filter">Categoria: </label>
-        <%
-            List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
-            for(Categoria categoria : categorias) {
-        %>
-        <input type="checkbox" name="categoria_filter" value=<%=categoria.getTitulo()%>> <%=categoria.getTitulo()%>
-        <%
-            }
-        %>
+        <form:select path="categoria_filter">
+            <form:options items="<%=categorias%>" itemValue="titulo" itemLabel="titulo"/>
+        </form:select>
         <br>
         <%--@declare id="min_init_value"--%><label for="min_init_value">Min. Valor Inicial: </label>
-        <input type="number" name="min_init_value">
+        <form:input min="0" value="0" type="number" name="min_init_value" path="min_init_value"/>
         <br>
         <%--@declare id="max_init_value"--%><label for="max_init_value">Max. Valor Inicial: </label>
-        <input type="number" name="max_init_value">
+        <form:input max="<%=Integer.MAX_VALUE%>" value="<%=Integer.MAX_VALUE%>" type="number" name="max_init_value" path="max_init_value"/>
         <br>
-        <%--@declare id="finish-date"--%><label for="finish-date">Max. fecha de fin: </label>
-        <input type="date" name="finish-date">
-        <input type="submit" value="Filtrar">
-    </form>
+        <%--@declare id="finish-date"--%><label for="finish_date">Max. fecha de fin: </label>
+        <form:input type="date" name="finish_date" path="finish_string"/>
+        <form:button type="submit" value="Filtrar">
+            Filtrar
+        </form:button>
+    </form:form>
     <h2>Subastas Publicadas</h2>
     <table class="table">
         <tr>
@@ -82,7 +85,7 @@
             <th></th>
         </tr>
         <%
-            SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
             List<Subasta> subastas = (List<Subasta>) request.getAttribute("subastas");
             for(Subasta subasta : subastas) {
         %>
@@ -148,6 +151,6 @@
             }
         %>
     </table>
-    </body>
 </main>
+</body>
 </html>

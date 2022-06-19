@@ -24,8 +24,6 @@ public class CategoriaService {
         return entityListToDTO(categoriaRepository.findAll());
     }
 
-
-
     private List<Categoria> entityListToDTO(List<CategoriaEntity> categorias) {
         return categorias.stream().map(CategoriaEntity::toDTO).collect(Collectors.toList());
     }

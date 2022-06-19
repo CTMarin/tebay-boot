@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 /**
@@ -41,6 +42,14 @@ public class SubastaService {
 
     public List<Subasta> findByArticuloNameAndSeller(Integer user_id, String title){
         return entityListToDTO(subastaRepository.findByArticuloNameAndSeller(user_id,title));
+    }
+
+    public List<Subasta> findAllFiltered(Integer user_id, Double min_valor, Double max_valor, Date fecha_limite) {
+        return entityListToDTO(this.subastaRepository.findAllFiltered(user_id, min_valor, max_valor, fecha_limite));
+    }
+
+    public List<Subasta> findAllFilteredNoDate(Integer user_id, Double min_valor, Double max_valor) {
+        return entityListToDTO(this.subastaRepository.findAllFilteredNoDate(user_id, min_valor, max_valor));
     }
 
     public List<Subasta> findByFavs(Integer user_id){
