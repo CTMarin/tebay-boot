@@ -22,7 +22,7 @@
 
     <form:hidden path="idUsuario"></form:hidden>
     Email: <form:input path="email" size="30" /> <br/>
-    Contraseña: <form:input path="password" size="30" /> <br/>
+    Contraseña: <form:password path="password" size="30" /> <br/>
     Nombre: <form:input path="nombre" size="30" /> <br/>
     Apellidos: <form:input path="apellidos" size="30" /> <br/>
     Edad: <form:input path="edad" size="30" /> <br/>
