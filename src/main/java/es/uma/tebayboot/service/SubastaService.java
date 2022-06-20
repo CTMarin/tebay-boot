@@ -153,7 +153,7 @@ public class SubastaService {
         subastaADevolver.setTitulo(subasta.getArticulo().getTitulo());
         subastaADevolver.setDescripcion(subasta.getArticulo().getDescripcion());
         subastaADevolver.setUrl_imagen(subasta.getArticulo().getUrlArticulo());
-        subastaADevolver.setFecha_limite((Date) subasta.getFechaLimite());
+        subastaADevolver.setFecha_limite((java.sql.Date) subasta.getFechaLimite());
         subastaADevolver.setValor_inicial(subasta.getValorInicial());
         subastaADevolver.setIdSubasta(subasta.getIdSubasta());
 
