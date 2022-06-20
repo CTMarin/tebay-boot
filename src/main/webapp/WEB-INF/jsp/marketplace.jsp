@@ -79,7 +79,15 @@
                 <%=subasta.getValorInicial()%>
             </td>
             <td class="cell-content">
-                <%=subasta.getPuja()%>
+                <%
+                    String puja;
+                    if (subasta.getPuja()==null){
+                        puja="-";
+                    }else{
+                        puja=subasta.getPuja().toString();
+                    }
+                %>
+                <%=puja%>
             </td>
             <td class="cell-content">
                 <%=subasta.getFechaLimite().toString()%>

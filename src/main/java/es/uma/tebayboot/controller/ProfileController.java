@@ -87,19 +87,19 @@ public class ProfileController {
                 if(filters.getFinish_string() == null || Objects.equals(filters.getFinish_string(), "")) {
                     subastas = subastaService.findAllFilteredNoDate(usuario.getIdUsuario(), filters.getMin_init_value(), filters.getMax_init_value());
                 } else {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = formatter.parse(filters.getFinish_string());
                     subastas = subastaService.findAllFiltered(usuario.getIdUsuario(), filters.getMin_init_value(), filters.getMax_init_value(), date);
                 }
             } else {
                 if(searchbox.getTitle() == null) {
-                    subastas = this.subastaService.findAll();
+                    subastas = this.subastaService.findByArticuloNameAndSeller(usuario.getIdUsuario(),"");
                 } else {
                     subastas = this.subastaService.findByArticuloNameAndSeller(usuario.getIdUsuario(), searchbox.getTitle());
                 }
             }
         } else {
-            subastas = this.subastaService.findAll();
+            subastas = this.subastaService.findByArticuloNameAndSeller(usuario.getIdUsuario(),"");
         }
         model.addAttribute("subastas", subastas);
         model.addAttribute("searchbox", new SearchFilter());
