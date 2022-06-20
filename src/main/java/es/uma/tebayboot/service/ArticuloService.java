@@ -2,6 +2,7 @@ package es.uma.tebayboot.service;
 
 import es.uma.tebayboot.dao.ArticuloRepository;
 import es.uma.tebayboot.dao.CategoriaRepository;
+import es.uma.tebayboot.dao.UsuarioRepository;
 import es.uma.tebayboot.dto.Articulo;
 import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.Usuario;
@@ -11,13 +12,15 @@ import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 /**
  * author:
  *  - Carmen González Ortega 30%
- *  - Carlos Marín Corbera 70%
+ *  - Carlos Marín Corbera 50%
+ *  - Álvaro J. Tapia Muñoz: 20%
  */
 @Service
 public class ArticuloService {
@@ -26,6 +29,8 @@ public class ArticuloService {
     ArticuloRepository articuloRepository;
     @Autowired
     CategoriaRepository categoriaRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     public List<Articulo> findByGanador_IdUsuario(Integer id_user){
         return entityListToDTO(articuloRepository.findByGanador_IdUsuario(id_user));
@@ -66,5 +71,32 @@ public class ArticuloService {
 
     public void updateSubasta(int product_id, int auction) {
         this.articuloRepository.updateSubasta(product_id, auction);
+    }
+
+    public ArticuloEntity formarArticulo(String titulo, String descripcion, String url,Integer idArticulo)
+    {
+        ArticuloEntity articulo = new ArticuloEntity();
+
+        articulo.setUrlArticulo(url);
+        articulo.setDescripcion(descripcion);
+        articulo.setTitulo(titulo);
+        articulo.setIdArticulo(idArticulo);
+
+
+        articuloRepository.save(articulo);
+
+        return articulo;
+    }
+
+    public void asignarGanador(Usuario usuario, Integer id_articulo) {
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(usuario.getIdUsuario()).orElse(null);
+        ArticuloEntity articulo = articuloRepository.findById(id_articulo).orElse(null);
+        articulo.setGanador(usuarioEntity);
+        articuloRepository.save(articulo);
+
+        List<ArticuloEntity> lista = usuarioEntity.getArticuloList();
+        lista.add(articulo);
+        usuarioEntity.setArticuloList(lista);
+        usuarioRepository.save(usuarioEntity);
     }
 }

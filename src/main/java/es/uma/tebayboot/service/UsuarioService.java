@@ -3,6 +3,7 @@ package es.uma.tebayboot.service;
 import es.uma.tebayboot.dao.DomicilioRepository;
 import es.uma.tebayboot.dao.UsuarioRepository;
 import es.uma.tebayboot.dto.Usuario;
+import es.uma.tebayboot.dto.form.UsuarioEditar;
 import es.uma.tebayboot.dto.form.UsuarioRegister;
 import es.uma.tebayboot.entity.DomicilioEntity;
 import es.uma.tebayboot.entity.UsuarioEntity;
@@ -20,6 +21,7 @@ import java.util.List;
 public class UsuarioService {
     UsuarioRepository usuarioRepository;
     DomicilioRepository domicilioRepository;
+    DomicilioService domicilioService;
 
 
     public DomicilioRepository getDomicilioRepository() {
@@ -39,6 +41,17 @@ public class UsuarioService {
     public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
+
+    public DomicilioService getDomicilioService() {
+        return domicilioService;
+    }
+
+    @Autowired
+    public void setDomicilioService(DomicilioService domicilioService) {
+        this.domicilioService = domicilioService;
+    }
+
+
 
     public Usuario findById(Integer id) {
         UsuarioEntity result = this.usuarioRepository.findById(id).orElse(null);
@@ -98,5 +111,75 @@ public class UsuarioService {
             lista = this.usuarioRepository.findAll();
         }
         return this.listEntityADTO(lista);
+    }
+
+    public Usuario buscarUsuario(Integer id)
+    {
+        //UsuarioEntity usuario = this.usuarioRepository.findByIdUsuario(id);
+        UsuarioEntity usuario = this.usuarioRepository.findById(id).orElse(null);
+
+        if(usuario != null)
+        {
+            return usuario.toDTO();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void borrarUsuario(Integer id)
+    {
+        UsuarioEntity usuario = this.usuarioRepository.findById(id).orElse(null);
+        this.usuarioRepository.delete(usuario);
+        this.domicilioService.borrarDomicilio(usuario.getDomicilio().getIdDomicilio());
+    }
+
+    public void guardarUsuario(UsuarioEditar dto)
+    {
+        UsuarioEntity usuario;
+
+        usuario = new UsuarioEntity();
+
+        usuario.setEmail(dto.getEmail());
+        usuario.setPassword(dto.getPassword());
+        usuario.setNombre(dto.getNombre());
+        usuario.setApellidos(dto.getApellidos());
+        usuario.setEdad(dto.getEdad());
+        usuario.setSexo(dto.getSexo());
+        usuario.setPermiso(dto.getPermiso());
+        usuario.setIdUsuario(dto.getIdUsuario());
+
+        DomicilioEntity domicilio = domicilioService.formarDomicilio(dto.getPais(),dto.getCiudad(),dto.getCalle(),dto.getNumero(),dto.getCodigoPostal(),dto.getBloque(),dto.getPiso(),dto.getPuerta(),dto.getIdDomicilio());
+
+        usuario.setDomicilio(domicilio);
+        this.domicilioRepository.save(domicilio);
+        this.usuarioRepository.save(usuario);
+
+
+    }
+
+    public UsuarioEditar usuarioAEditar(Usuario usuario)
+    {
+        UsuarioEditar usuarioADevolver = new UsuarioEditar();
+
+        usuarioADevolver.setEmail(usuario.getEmail());
+        usuarioADevolver.setPassword(usuario.getPassword());
+        usuarioADevolver.setNombre(usuario.getNombre());
+        usuarioADevolver.setApellidos(usuario.getApellidos());
+        usuarioADevolver.setEdad(usuario.getEdad());
+        usuarioADevolver.setSexo(usuario.getSexo());
+        usuarioADevolver.setPermiso(usuario.getPermiso());
+        usuarioADevolver.setPais(usuario.getDomicilio().getPais());
+        usuarioADevolver.setCiudad(usuario.getDomicilio().getCiudad());
+        usuarioADevolver.setCodigoPostal(usuario.getDomicilio().getCodigoPostal());
+        usuarioADevolver.setCalle(usuario.getDomicilio().getCalle());
+        usuarioADevolver.setNumero(usuario.getDomicilio().getNumero());
+        usuarioADevolver.setBloque(usuario.getDomicilio().getBloque());
+        usuarioADevolver.setPiso(usuario.getDomicilio().getPiso());
+        usuarioADevolver.setPuerta(usuario.getDomicilio().getPuerta());
+        usuarioADevolver.setIdUsuario(usuario.getIdUsuario());
+
+        return usuarioADevolver;
     }
 }

@@ -1,6 +1,7 @@
 package es.uma.tebayboot.dao;
 
 import es.uma.tebayboot.entity.SubastaEntity;
+import es.uma.tebayboot.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 /**
- * author: Carmen González Ortega 100%
+ * - Carmen González Ortega 33%
+ * - Álvaro J. Tapia Muñoz 33%
+ * - Carlos Marín Corbera 33%
  */
 @Repository
 public interface SubastaRepository extends JpaRepository<SubastaEntity,Integer> {
@@ -35,4 +38,8 @@ public interface SubastaRepository extends JpaRepository<SubastaEntity,Integer> 
             "subasta.vendedor.idUsuario = :user_id and " +
             "subasta.valorInicial between :min and :max")
     List<SubastaEntity> findAllFilteredNoDate(@Param("user_id") Integer user_id, @Param("min") Double min_valor, @Param("max") Double max_valor);
+
+    @Query("select subasta from SubastaEntity subasta where subasta.articulo.titulo like CONCAT('%',:nombre,'%')")
+    List<SubastaEntity> findByNombre(@Param("nombre") String nombre);
+
 }

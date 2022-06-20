@@ -5,6 +5,7 @@ import es.uma.tebayboot.dao.SubastaRepository;
 import es.uma.tebayboot.dao.UsuarioRepository;
 import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.form.PublishAuction;
+import es.uma.tebayboot.dto.form.SubastaEdit;
 import es.uma.tebayboot.entity.ArticuloEntity;
 import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.entity.PujaEntity;
@@ -19,8 +20,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 /**
  * author:
- *  - Carmen González Ortega 50%
- *  - Carlos Marín Corbera 50%
+ *  - Carmen González Ortega 33%
+ *  - Carlos Marín Corbera 33%
+ *  - Álvaro J. Tapia Muñoz 33%
  */
 @Service
 public class SubastaService {
@@ -112,6 +114,73 @@ public class SubastaService {
 
             pujaService.create(nuevaPuja,id_subasta,usuario.getIdUsuario());
         }
+    }
+
+    public List<Subasta> listarSubastas(String filtroNombre)
+    {
+        List<SubastaEntity> lista;
+
+        if(filtroNombre != null && filtroNombre.length() > 0)
+        {
+            lista = this.subastaRepository.findByNombre(filtroNombre);
+        }
+        else
+        {
+            lista = this.subastaRepository.findAll();
+        }
+
+        return this.entityListToDTO(lista);
+    }
+
+    public Subasta buscarSubasta(Integer id)
+    {
+        SubastaEntity subasta = this.subastaRepository.findById(id).orElse(null);
+
+        if(subasta != null)
+        {
+            return subasta.toDTO();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public SubastaEdit subastaAEditar(Subasta subasta)
+    {
+        SubastaEdit subastaADevolver = new SubastaEdit();
+
+        subastaADevolver.setTitulo(subasta.getArticulo().getTitulo());
+        subastaADevolver.setDescripcion(subasta.getArticulo().getDescripcion());
+        subastaADevolver.setUrl_imagen(subasta.getArticulo().getUrlArticulo());
+        subastaADevolver.setFecha_limite((Date) subasta.getFechaLimite());
+        subastaADevolver.setValor_inicial(subasta.getValorInicial());
+        subastaADevolver.setIdSubasta(subasta.getIdSubasta());
+
+        return subastaADevolver;
+    }
+
+    public void borrarSubasta(Integer id)
+    {
+        SubastaEntity subasta = this.subastaRepository.findById(id).orElse(null);
+        //this.subastaRepository.delete(subasta);
+        this.articuloRepository.delete(subasta.getArticulo());
+    }
+
+    public void guardarSubasta(SubastaEdit dto)
+    {
+
+        SubastaEntity subasta = this.subastaRepository.findById(dto.getIdSubasta()).orElse(null);
+
+        subasta.getArticulo().setTitulo(dto.getTitulo());
+        subasta.getArticulo().setDescripcion(dto.getDescripcion());
+        subasta.getArticulo().setUrlArticulo(dto.getUrl_imagen());
+        subasta.setValorInicial(dto.getValor_inicial());
+        subasta.setFechaLimite(dto.getFecha_limite());
+
+        this.subastaRepository.save(subasta);
+
+
     }
 
 }

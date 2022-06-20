@@ -16,11 +16,11 @@
 </head>
 <body>
     <h1>Listado de usuarios</h1>
-    <%--<form:form method="post" action="/admin/filtrar" modelAttribute="usuarios">
-        Nombre: <f type="text" name="filtroNombre" value=""/>
-        <input type="submit" value="Filtrar">
-    </form:form>
-    --%>
+
+    <form method="post" action="/admin/filtrar">
+        Nombre:<input type="text" name="filtro" value=""/>
+        <input type="submit" value="Filtrar"/>
+    </form>
 
     <%
         List<Usuario> usuarios = (List<Usuario>)request.getAttribute("usuarios");
@@ -60,10 +60,8 @@
             <td><%= usuario.getSexo()%></td>
             <td><%= usuario.getPermiso()%></td>
             <td><%= usuario.getDomicilio().toString()%></td>
-            <%--
-            <td><a href="AdminBorrarServlet?id=<%= usuario.getIdUsuario()%>">Borrar</a></td>
-            <td><a href="AdminCrearEditarServlet?id=<%= usuario.getIdUsuario()%>">Editar</a></td>
-            --%>
+            <td><a href="/admin/<%= usuario.getIdUsuario()%>/edit">Editar</a> </td>
+            <td><a href="/admin/<%= usuario.getIdUsuario()%>/borrar">Borrar</a> </td>
 
         </tr>
         <%
@@ -74,10 +72,10 @@
             }
         %>
     </table>
-    <%--
-    <a href="AdminCrearEditarServlet">Crear nuevo usuario</a> <br/>
 
-    <br/> <a href="ListaProductosServlet">Listado de productos</a>
-    --%>
+    <a href="/admin/nuevo">Crear nuevo usuario</a> <br/>
+
+    <br/> <a href="/admin/listaSubastas">Listado de subastas</a>
+
 </body>
 </html>

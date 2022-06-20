@@ -140,7 +140,7 @@
                 <%
                     if (ganador==null && subasta.getFechaLimite().before(Date.from(Instant.now()))){
                 %>
-                <form method="post" action="asignar-ganador">
+                <form method="get" action="/product/asignar">
                     <input type="hidden" name="articuloId" value="<%=subasta.getArticulo().getIdArticulo()%>">
                     <input type="submit" value="Confirmar Ganador">
                 </form>

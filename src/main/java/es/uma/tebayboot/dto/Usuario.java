@@ -7,14 +7,15 @@ package es.uma.tebayboot.dto;
  */
 public class Usuario {
 
-    private Integer idUsuario;
     private String nombre;
     private String apellidos;
+    private Integer idUsuario;
     private String email;
     private int edad;
     private String sexo;
     private String permiso;
     private Domicilio domicilio;
+    private String password;
 
 
     public String getNombre() {
@@ -31,6 +32,22 @@ public class Usuario {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getEdad() {
@@ -65,19 +82,11 @@ public class Usuario {
         this.permiso = permiso;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
