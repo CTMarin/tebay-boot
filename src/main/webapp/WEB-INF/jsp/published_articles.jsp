@@ -45,11 +45,13 @@
         <input type="submit" value="Volver" />
     </form>
     <h2>Búsqueda</h2>
-    <form method="get" action="published-articles">
+    <form:form method="get" action="published-articles" modelAttribute="searchbox">
         <%--@declare id="searchbox"--%><label for="searchbox">Search: </label>
-        <input type="search" name="searchbox">
-        <input type="submit" value="Buscar">
-    </form>
+        <form:input type="search" name="searchbox" path="title"/>
+        <form:button type="submit" value="Buscar">
+            Buscar
+        </form:button>
+    </form:form>
     <h2>Filtros</h2>
     <%
         List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");

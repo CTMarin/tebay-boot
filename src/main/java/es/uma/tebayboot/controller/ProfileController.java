@@ -6,6 +6,7 @@ import es.uma.tebayboot.dto.Subasta;
 import es.uma.tebayboot.dto.Usuario;
 import es.uma.tebayboot.dto.form.FilterAuction;
 import es.uma.tebayboot.dto.form.PublishAuction;
+import es.uma.tebayboot.dto.form.SearchFilter;
 import es.uma.tebayboot.service.ArticuloService;
 import es.uma.tebayboot.service.CategoriaService;
 import es.uma.tebayboot.service.SubastaService;
@@ -70,31 +71,38 @@ public class ProfileController {
     }
 
     @GetMapping("published-articles")
-    public String doPublishedAuctions(Model model, HttpSession session, @ModelAttribute FilterAuction filters) throws ParseException {
+    public String doPublishedAuctions(Model model, HttpSession session, @ModelAttribute FilterAuction filters, @ModelAttribute SearchFilter searchbox) throws ParseException {
         Usuario usuario = (Usuario) session.getAttribute("user");
         if(!filters.isFilter()) {
             model.addAttribute("filters", new FilterAuction());
         } else {
             model.addAttribute("filters", filters);
         }
+
+        List<Subasta> subastas;
         if(usuario != null) {
             List<Categoria> categorias = categoriaService.findAll();
             model.addAttribute("categorias",categorias);
-            List<Subasta> subastas;
             if (filters.isFilter()) {
                 if(filters.getFinish_string() == null || Objects.equals(filters.getFinish_string(), "")) {
                     subastas = subastaService.findAllFilteredNoDate(usuario.getIdUsuario(), filters.getMin_init_value(), filters.getMax_init_value());
                 } else {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-
                     Date date = formatter.parse(filters.getFinish_string());
                     subastas = subastaService.findAllFiltered(usuario.getIdUsuario(), filters.getMin_init_value(), filters.getMax_init_value(), date);
                 }
             } else {
-                subastas = subastaService.findAll();
+                if(searchbox.getTitle() == null) {
+                    subastas = this.subastaService.findAll();
+                } else {
+                    subastas = this.subastaService.findByArticuloNameAndSeller(usuario.getIdUsuario(), searchbox.getTitle());
+                }
             }
-            model.addAttribute("subastas",subastas);
+        } else {
+            subastas = this.subastaService.findAll();
         }
+        model.addAttribute("subastas", subastas);
+        model.addAttribute("searchbox", new SearchFilter());
         return "published_articles";
     }
 
